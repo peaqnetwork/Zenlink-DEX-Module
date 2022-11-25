@@ -11,7 +11,7 @@ members = [
 	"zenlink-swap-router",
 	"zenlink-vault",
 	"zenlink-gauge",
-	"example/node",
-	"example/runtime",
-	"example/primitives"
+	# "example/node",
+	# "example/runtime",
+	# "example/primitives"
 ]

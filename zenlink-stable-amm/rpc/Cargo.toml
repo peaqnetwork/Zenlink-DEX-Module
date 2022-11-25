@@ -7,12 +7,13 @@ edition = "2021"
 serde = { version = "1.0.119", features = ["derive"], optional = true }
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false }
 
-jsonrpsee = { version = "0.15.1", features = ["server", "macros"] }
+# jsonrpsee = { version = "0.15.1", features = ["server", "macros"] }
+jsonrpsee = { git = "https://github.com/peaqnetwork/jsonrpsee", branch = "peaq-v0.15.1", features = ["server", "macros"] }
 
 
-sp-blockchain = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.29" }
-sp-api = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.29" }
-sp-rpc = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.29" }
-sp-runtime = { git = "https://github.com/paritytech/substrate", default-features = false, branch = "polkadot-v0.9.29" }
+sp-blockchain = { git = "https://github.com/peaqnetwork/substrate", default-features = false, branch = "peaq-polkadot-v0.9.29" }
+sp-api = { git = "https://github.com/peaqnetwork/substrate", default-features = false, branch = "peaq-polkadot-v0.9.29" }
+sp-rpc = { git = "https://github.com/peaqnetwork/substrate", default-features = false, branch = "peaq-polkadot-v0.9.29" }
+sp-runtime = { git = "https://github.com/peaqnetwork/substrate", default-features = false, branch = "peaq-polkadot-v0.9.29" }
 
 zenlink-stable-amm-runtime-api = { path = "./runtime-api", version = "0.1.0"}
