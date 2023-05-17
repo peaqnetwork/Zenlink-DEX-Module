@@ -18,10 +18,10 @@ sp-runtime = { git = "https://github.com/peaqnetwork/substrate", default-feature
 sp-std = { git = "https://github.com/peaqnetwork/substrate", default-features = false, branch = "peaq-polkadot-v0.9.38" }
 sp-arithmetic = { git = "https://github.com/peaqnetwork/substrate", default-features = false, branch = "peaq-polkadot-v0.9.38" }
 
-orml-traits = { git = "https://github.com/open-web3-stack/open-runtime-module-library", rev = "f60655f922204a803ee945ffddba6ca530caffe0", default-features = false }
+orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-v0.9.38", default-features = false }
 
 [dev-dependencies]
-orml-tokens = { git = "https://github.com/open-web3-stack/open-runtime-module-library", rev = "f60655f922204a803ee945ffddba6ca530caffe0", default-features = false }
+orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-v0.9.38", default-features = false }
 pallet-balances = { git = "https://github.com/peaqnetwork/substrate", branch = "peaq-polkadot-v0.9.38" }
 sp-core = { git = "https://github.com/peaqnetwork/substrate", branch = "peaq-polkadot-v0.9.38", default-features = false }
 sp-io = { git = "https://github.com/peaqnetwork/substrate", branch = "peaq-polkadot-v0.9.38", default-features = false }

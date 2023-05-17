@@ -32,8 +32,8 @@ xcm-executor = { git = "https://github.com/peaqnetwork/polkadot", branch = "peaq
 # Cumulus
 cumulus-primitives-core = { git = "https://github.com/peaqnetwork/cumulus", default-features = false, branch = "peaq-polkadot-v0.9.38" }
 
-orml-traits = { git = "https://github.com/open-web3-stack/open-runtime-module-library", rev = "f60655f922204a803ee945ffddba6ca530caffe0", default-features = false }
-orml-tokens = { git = "https://github.com/open-web3-stack/open-runtime-module-library", rev = "f60655f922204a803ee945ffddba6ca530caffe0", default-features = false }
+orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-v0.9.38", default-features = false }
+orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-v0.9.38", default-features = false }
 
 [dev-dependencies]
 sp-core = { git = "https://github.com/peaqnetwork/substrate", default-features = false, branch = "peaq-polkadot-v0.9.38" }
