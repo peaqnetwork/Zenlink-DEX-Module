@@ -109,6 +109,10 @@ impl<T: Config> Pallet<T> {
 		Self::foreign_meta(id)
 	}
 
+    pub fn foreign_minimum_balance(id: T::AssetId) -> AssetBalance {
+        Self::foreign_existial_deposit(id)
+    }
+
 	pub fn foreign_is_exists(id: T::AssetId) -> bool {
 		Self::foreign_list().contains(&id)
 	}

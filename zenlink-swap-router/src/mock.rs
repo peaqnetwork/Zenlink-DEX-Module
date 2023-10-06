@@ -292,6 +292,11 @@ where
 			.map_or(AssetBalance::default(), |currency_id| Local::total_issuance(currency_id))
 	}
 
+    fn local_min_balance(asset_id: AssetId) -> AssetBalance {
+        asset_id_to_currency_id(&asset_id)
+            .map_or(AssetBalance::default(), |currency_id| Local::minimum_balance(currency_id))
+    }
+
 	fn local_is_exists(asset_id: AssetId) -> bool {
 		asset_id_to_currency_id(&asset_id).map_or(false, |currency_id| {
 			Local::total_issuance(currency_id) > AssetBalance::default()

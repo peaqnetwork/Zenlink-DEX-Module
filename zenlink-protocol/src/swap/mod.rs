@@ -740,6 +740,40 @@ impl<T: Config> Pallet<T> {
 		})
 	}
 
+    pub(crate) fn do_end_bootstrap_transfer(
+        who: T::AccountId,
+        asset_0: T::AssetId,
+        asset_1: T::AssetId,
+    ) -> DispatchResult {
+		let pair = Self::sort_asset_id(asset_0, asset_1);
+        // We are make sure thebootstrap parameter is exist, no need to double check
+		match Self::pair_status(pair) {
+			Bootstrap(bootstrap_parameter) => {
+                let amount_0 = T::MultiAssetsHandler::minimum_balance(asset_0);
+                let amount_1 = T::MultiAssetsHandler::minimum_balance(asset_1);
+
+	    	    let (amount_0, amount_1) = if pair.0 == asset_0 {
+		        	(amount_0, amount_1)
+		        } else {
+			        (amount_1, amount_0)
+    		    };
+    
+    		    T::MultiAssetsHandler::transfer(
+                    pair.0,
+                    &who, 
+                    &bootstrap_parameter.pair_account,
+                    amount_0)?;
+	    	    T::MultiAssetsHandler::transfer(
+                    pair.1,
+                    &who,
+                    &bootstrap_parameter.pair_account,
+                    amount_1)?;
+                Ok(())
+            },
+            _ => Err(Error::<T>::NotInBootstrap.into()),
+        }
+    }
+
 	pub(crate) fn do_end_bootstrap(asset_0: T::AssetId, asset_1: T::AssetId) -> DispatchResult {
 		let pair = Self::sort_asset_id(asset_0, asset_1);
 		match Self::pair_status(pair) {
