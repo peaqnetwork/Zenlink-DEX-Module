@@ -385,6 +385,8 @@ pub mod pallet {
 		PairNotExists,
 		/// Asset does not exist.
 		AssetNotExists,
+        /// Asset create fail,
+        AssetCreateFail,
 		/// Liquidity is not enough.
 		InsufficientLiquidity,
 		/// Trading pair does have enough foreign.

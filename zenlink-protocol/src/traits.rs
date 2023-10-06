@@ -5,6 +5,7 @@ use super::*;
 
 pub trait GenerateLpAssetId<AssetId> {
 	fn generate_lp_asset_id(asset_0: AssetId, asset_1: AssetId) -> Option<AssetId>;
+    fn create_lp_asset(asset_0: &AssetId, asset_1: &AssetId) -> Option<()>;
 }
 
 pub trait LocalAssetHandler<AccountId> {
