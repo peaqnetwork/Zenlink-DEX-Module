@@ -26,7 +26,7 @@ use frame_support::{
 	pallet_prelude::*,
 	sp_runtime::SaturatedConversion,
 	traits::{
-		Currency, ExistenceRequirement, ExistenceRequirement::AllowDeath, Get, WithdrawReasons,
+		Currency, ExistenceRequirement, ExistenceRequirement::KeepAlive, Get, WithdrawReasons,
 	},
 	PalletId, RuntimeDebug,
 };
@@ -125,6 +125,11 @@ pub mod pallet {
 	#[pallet::getter(fn foreign_meta)]
 	/// TWOX-NOTE: `AssetId` is trusted, so this is safe.
 	pub type ForeignMeta<T: Config> =
+		StorageMap<_, Twox64Concat, T::AssetId, AssetBalance, ValueQuery>;
+
+	#[pallet::storage]
+	#[pallet::getter(fn foreign_existial_deposit)]
+	pub type ForeignMinimumBalance<T: Config> =
 		StorageMap<_, Twox64Concat, T::AssetId, AssetBalance, ValueQuery>;
 
 	#[pallet::storage]
@@ -911,8 +916,14 @@ pub mod pallet {
 			asset_0: T::AssetId,
 			asset_1: T::AssetId,
 		) -> DispatchResult {
-			ensure_signed(origin)?;
+			let who = ensure_signed(origin)?;
 			Self::mutate_lp_pairs(asset_0, asset_1)?;
+
+            Self::do_end_bootstrap_transfer(
+                who,
+                asset_0,
+                asset_1,
+            )?;
 
 			Self::do_end_bootstrap(asset_0, asset_1)
 		}

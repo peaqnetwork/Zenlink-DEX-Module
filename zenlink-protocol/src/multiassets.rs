@@ -8,6 +8,8 @@ pub trait MultiAssetsHandler<AccountId, AssetId: Copy> {
 
 	fn total_supply(asset_id: AssetId) -> AssetBalance;
 
+    fn minimum_balance(asset_id: AssetId) -> AssetBalance;
+
 	fn is_exists(asset_id: AssetId) -> bool;
 
 	fn transfer(
@@ -43,6 +45,7 @@ impl<T: Config<AssetId = AssetId>, NativeCurrency, Local, Other>
 	MultiAssetsHandler<T::AccountId, AssetId>
 	for ZenlinkMultiAssets<Pallet<T>, NativeCurrency, Local, Other>
 where
+    // Currency has the call minimum_balance
 	NativeCurrency: Currency<T::AccountId>,
 	Local: LocalAssetHandler<T::AccountId>,
 	Other: OtherAssetHandler<T::AccountId>,
@@ -75,6 +78,19 @@ where
 		}
 	}
 
+    fn minimum_balance(asset_id: AssetId) -> AssetBalance {
+   		let self_chain_id: u32 = T::SelfParaId::get();
+		match asset_id.asset_type {
+			NATIVE if asset_id.is_native(T::SelfParaId::get()) =>
+				NativeCurrency::minimum_balance().saturated_into::<AssetBalance>(),
+			LOCAL | LIQUIDITY if asset_id.chain_id == self_chain_id =>
+				Local::local_minimum_balance(asset_id),
+			RESERVED if asset_id.chain_id == self_chain_id => Other::other_minimum_balance(asset_id),
+			_ if asset_id.is_foreign(self_chain_id) => Pallet::<T>::foreign_minimum_balance(asset_id),
+			_ => Default::default(),
+		}
+    }
+
 	fn is_exists(asset_id: AssetId) -> bool {
 		let self_chain_id: u32 = T::SelfParaId::get();
 		match asset_id.asset_type {
@@ -102,7 +118,7 @@ where
 					.try_into()
 					.map_err(|_| DispatchError::Other("AmountToBalanceConversionFailed"))?;
 
-				NativeCurrency::transfer(origin, target, balance_amount, AllowDeath)
+				NativeCurrency::transfer(origin, target, balance_amount, KeepAlive)
 			},
 			LOCAL | LIQUIDITY if asset_id.chain_id == self_chain_id =>
 				Local::local_transfer(asset_id, origin, target, amount),
