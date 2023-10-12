@@ -108,7 +108,7 @@ where
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
 
-		api.get_amount_in_price(&at, supply, path)
+		api.get_amount_in_price(at, supply, path)
 			.map(|price| price.into())
 			.map_err(runtime_error_into_rpc_err)
 	}
@@ -122,7 +122,7 @@ where
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
 
-		api.get_amount_out_price(&at, supply, path)
+		api.get_amount_out_price(at, supply, path)
 			.map(|price| price.into())
 			.map_err(runtime_error_into_rpc_err)
 	}
@@ -140,7 +140,7 @@ where
 		let api = self.client.runtime_api();
 
 		api.get_estimate_lptoken(
-			&at,
+			at,
 			asset_0,
 			asset_1,
 			amount_0_desired,
@@ -160,7 +160,7 @@ where
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
 
-		api.get_balance(&at, asset_id, account)
+		api.get_balance(at, asset_id, account)
 			.map(|asset_balance| asset_balance.into())
 			.map_err(runtime_error_into_rpc_err)
 	}
@@ -173,7 +173,7 @@ where
 	) -> RpcResult<Option<PairInfo<AccountId, NumberOrHex, AssetId>>> {
 		let api = self.client.runtime_api();
 
-		api.get_pair_by_asset_id(&at, asset_0, asset_1)
+		api.get_pair_by_asset_id(at, asset_0, asset_1)
 			.map(|pairs| {
 				pairs.map(|pair| PairInfo {
 					asset_0: pair.asset_0,
@@ -199,7 +199,7 @@ where
 	) -> RpcResult<Option<(AssetBalance, AssetBalance)>> {
 		let api = self.client.runtime_api();
 
-		api.calculate_remove_liquidity(&at, asset_0, asset_1, amount)
+		api.calculate_remove_liquidity(at, asset_0, asset_1, amount)
 			.map_err(runtime_error_into_rpc_err)
 	}
 }
