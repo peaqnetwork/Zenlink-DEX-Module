@@ -53,6 +53,7 @@ use sp_std::marker::PhantomData;
 pub trait WeightInfo {
 	fn set_fee_receiver() -> Weight;
 	fn set_fee_point() -> Weight;
+    fn transfer() -> Weight;
 	fn create_pair() -> Weight;
 	fn bootstrap_create() -> Weight;
 	fn bootstrap_contribute() -> Weight;
@@ -64,6 +65,8 @@ pub trait WeightInfo {
 	fn remove_liquidity() -> Weight;
 	fn swap_exact_assets_for_assets() -> Weight;
 	fn swap_assets_for_exact_assets() -> Weight;
+    fn bootstrap_charge_reward() -> Weight;
+    fn bootstrap_withdraw_reward() -> Weight;
 }
 
 /// Weights for zenlink_protocol using the Substrate node and recommended hardware.
@@ -72,14 +75,21 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol FeeMeta (r:1 w:1)
 	fn set_fee_receiver() -> Weight {
 		// Minimum execution time: 11_832 nanoseconds.
-		Weight::from_ref_time(12_352_000 as u64)
+		Weight::from_all(12_352_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(1 as u64))
 			.saturating_add(T::DbWeight::get().writes(1 as u64))
 	}
 	// Storage: ZenlinkProtocol FeeMeta (r:1 w:1)
 	fn set_fee_point() -> Weight {
 		// Minimum execution time: 10_838 nanoseconds.
-		Weight::from_ref_time(11_138_000 as u64)
+		Weight::from_all(11_138_000 as u64)
+			.saturating_add(T::DbWeight::get().reads(1 as u64))
+			.saturating_add(T::DbWeight::get().writes(1 as u64))
+	}
+    // Handwritten TODO.
+	fn transfer() -> Weight {
+		// Minimum execution time: 10_838 nanoseconds.
+		Weight::from_all(11_138_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(1 as u64))
 			.saturating_add(T::DbWeight::get().writes(1 as u64))
 	}
@@ -89,7 +99,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol LiquidityPairs (r:0 w:1)
 	fn create_pair() -> Weight {
 		// Minimum execution time: 39_930 nanoseconds.
-		Weight::from_ref_time(40_455_000 as u64)
+		Weight::from_all(40_455_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(3 as u64))
 			.saturating_add(T::DbWeight::get().writes(2 as u64))
 	}
@@ -98,7 +108,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol BootstrapRewards (r:0 w:1)
 	fn bootstrap_create() -> Weight {
 		// Minimum execution time: 33_101 nanoseconds.
-		Weight::from_ref_time(33_789_000 as u64)
+		Weight::from_all(33_789_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(1 as u64))
 			.saturating_add(T::DbWeight::get().writes(3 as u64))
 	}
@@ -109,7 +119,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol BootstrapPersonalSupply (r:1 w:1)
 	fn bootstrap_contribute() -> Weight {
 		// Minimum execution time: 81_992 nanoseconds.
-		Weight::from_ref_time(84_884_000 as u64)
+		Weight::from_all(84_884_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(8 as u64))
 			.saturating_add(T::DbWeight::get().writes(6 as u64))
 	}
@@ -124,7 +134,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol ForeignLedger (r:2 w:2)
 	fn bootstrap_claim() -> Weight {
 		// Minimum execution time: 124_722 nanoseconds.
-		Weight::from_ref_time(132_010_000 as u64)
+		Weight::from_all(132_010_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(11 as u64))
 			.saturating_add(T::DbWeight::get().writes(5 as u64))
 	}
@@ -138,7 +148,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol BootstrapEndStatus (r:0 w:1)
 	fn bootstrap_end() -> Weight {
 		// Minimum execution time: 118_171 nanoseconds.
-		Weight::from_ref_time(118_892_000 as u64)
+		Weight::from_all(118_892_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(9 as u64))
 			.saturating_add(T::DbWeight::get().writes(10 as u64))
 	}
@@ -147,7 +157,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol BootstrapLimits (r:0 w:1)
 	fn bootstrap_update() -> Weight {
 		// Minimum execution time: 43_282 nanoseconds.
-		Weight::from_ref_time(43_886_000 as u64)
+		Weight::from_all(43_886_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(2 as u64))
 			.saturating_add(T::DbWeight::get().writes(3 as u64))
 	}
@@ -157,7 +167,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol ForeignLedger (r:4 w:4)
 	fn bootstrap_refund() -> Weight {
 		// Minimum execution time: 86_444 nanoseconds.
-		Weight::from_ref_time(87_246_000 as u64)
+		Weight::from_all(87_246_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(7 as u64))
 			.saturating_add(T::DbWeight::get().writes(6 as u64))
 	}
@@ -171,7 +181,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: Tokens TotalIssuance (r:1 w:1)
 	fn add_liquidity() -> Weight {
 		// Minimum execution time: 124_880 nanoseconds.
-		Weight::from_ref_time(126_263_000 as u64)
+		Weight::from_all(126_263_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(11 as u64))
 			.saturating_add(T::DbWeight::get().writes(7 as u64))
 	}
@@ -185,7 +195,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: Tokens TotalIssuance (r:1 w:1)
 	fn remove_liquidity() -> Weight {
 		// Minimum execution time: 116_282 nanoseconds.
-		Weight::from_ref_time(119_636_000 as u64)
+		Weight::from_all(119_636_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(11 as u64))
 			.saturating_add(T::DbWeight::get().writes(7 as u64))
 	}
@@ -194,7 +204,7 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol PairStatuses (r:2 w:0)
 	fn swap_exact_assets_for_assets() -> Weight {
 		// Minimum execution time: 133_352 nanoseconds.
-		Weight::from_ref_time(134_554_000 as u64)
+		Weight::from_all(134_554_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(9 as u64))
 			.saturating_add(T::DbWeight::get().writes(6 as u64))
 	}
@@ -203,7 +213,21 @@ impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	// Storage: ZenlinkProtocol PairStatuses (r:2 w:0)
 	fn swap_assets_for_exact_assets() -> Weight {
 		// Minimum execution time: 134_003 nanoseconds.
-		Weight::from_ref_time(135_040_000 as u64)
+		Weight::from_all(135_040_000 as u64)
+			.saturating_add(T::DbWeight::get().reads(9 as u64))
+			.saturating_add(T::DbWeight::get().writes(6 as u64))
+	}
+
+    fn bootstrap_charge_reward() -> Weight {
+		// Minimum execution time: 134_003 nanoseconds.
+		Weight::from_all(135_040_000 as u64)
+			.saturating_add(T::DbWeight::get().reads(9 as u64))
+			.saturating_add(T::DbWeight::get().writes(6 as u64))
+	}
+
+    fn bootstrap_withdraw_reward() -> Weight {
+		// Minimum execution time: 134_003 nanoseconds.
+		Weight::from_all(135_040_000 as u64)
 			.saturating_add(T::DbWeight::get().reads(9 as u64))
 			.saturating_add(T::DbWeight::get().writes(6 as u64))
 	}
@@ -214,14 +238,21 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol FeeMeta (r:1 w:1)
 	fn set_fee_receiver() -> Weight {
 		// Minimum execution time: 11_832 nanoseconds.
-		Weight::from_ref_time(12_352_000 as u64)
+		Weight::from_all(12_352_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(1 as u64))
 			.saturating_add(RocksDbWeight::get().writes(1 as u64))
 	}
 	// Storage: ZenlinkProtocol FeeMeta (r:1 w:1)
 	fn set_fee_point() -> Weight {
 		// Minimum execution time: 10_838 nanoseconds.
-		Weight::from_ref_time(11_138_000 as u64)
+		Weight::from_all(11_138_000 as u64)
+			.saturating_add(RocksDbWeight::get().reads(1 as u64))
+			.saturating_add(RocksDbWeight::get().writes(1 as u64))
+	}
+    // Handwritten TODO.
+	fn transfer() -> Weight {
+		// Minimum execution time: 10_838 nanoseconds.
+		Weight::from_all(11_138_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(1 as u64))
 			.saturating_add(RocksDbWeight::get().writes(1 as u64))
 	}
@@ -231,7 +262,7 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol LiquidityPairs (r:0 w:1)
 	fn create_pair() -> Weight {
 		// Minimum execution time: 39_930 nanoseconds.
-		Weight::from_ref_time(40_455_000 as u64)
+		Weight::from_all(40_455_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(3 as u64))
 			.saturating_add(RocksDbWeight::get().writes(2 as u64))
 	}
@@ -240,7 +271,7 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol BootstrapRewards (r:0 w:1)
 	fn bootstrap_create() -> Weight {
 		// Minimum execution time: 33_101 nanoseconds.
-		Weight::from_ref_time(33_789_000 as u64)
+		Weight::from_all(33_789_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(1 as u64))
 			.saturating_add(RocksDbWeight::get().writes(3 as u64))
 	}
@@ -251,7 +282,7 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol BootstrapPersonalSupply (r:1 w:1)
 	fn bootstrap_contribute() -> Weight {
 		// Minimum execution time: 81_992 nanoseconds.
-		Weight::from_ref_time(84_884_000 as u64)
+		Weight::from_all(84_884_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(8 as u64))
 			.saturating_add(RocksDbWeight::get().writes(6 as u64))
 	}
@@ -266,7 +297,7 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol ForeignLedger (r:2 w:2)
 	fn bootstrap_claim() -> Weight {
 		// Minimum execution time: 124_722 nanoseconds.
-		Weight::from_ref_time(132_010_000 as u64)
+		Weight::from_all(132_010_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(11 as u64))
 			.saturating_add(RocksDbWeight::get().writes(5 as u64))
 	}
@@ -280,7 +311,7 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol BootstrapEndStatus (r:0 w:1)
 	fn bootstrap_end() -> Weight {
 		// Minimum execution time: 118_171 nanoseconds.
-		Weight::from_ref_time(118_892_000 as u64)
+		Weight::from_all(118_892_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(9 as u64))
 			.saturating_add(RocksDbWeight::get().writes(10 as u64))
 	}
@@ -289,7 +320,7 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol BootstrapLimits (r:0 w:1)
 	fn bootstrap_update() -> Weight {
 		// Minimum execution time: 43_282 nanoseconds.
-		Weight::from_ref_time(43_886_000 as u64)
+		Weight::from_all(43_886_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(2 as u64))
 			.saturating_add(RocksDbWeight::get().writes(3 as u64))
 	}
@@ -299,7 +330,7 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol ForeignLedger (r:4 w:4)
 	fn bootstrap_refund() -> Weight {
 		// Minimum execution time: 86_444 nanoseconds.
-		Weight::from_ref_time(87_246_000 as u64)
+		Weight::from_all(87_246_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(7 as u64))
 			.saturating_add(RocksDbWeight::get().writes(6 as u64))
 	}
@@ -313,7 +344,7 @@ impl WeightInfo for () {
 	// Storage: Tokens TotalIssuance (r:1 w:1)
 	fn add_liquidity() -> Weight {
 		// Minimum execution time: 124_880 nanoseconds.
-		Weight::from_ref_time(126_263_000 as u64)
+		Weight::from_all(126_263_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(11 as u64))
 			.saturating_add(RocksDbWeight::get().writes(7 as u64))
 	}
@@ -327,7 +358,7 @@ impl WeightInfo for () {
 	// Storage: Tokens TotalIssuance (r:1 w:1)
 	fn remove_liquidity() -> Weight {
 		// Minimum execution time: 116_282 nanoseconds.
-		Weight::from_ref_time(119_636_000 as u64)
+		Weight::from_all(119_636_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(11 as u64))
 			.saturating_add(RocksDbWeight::get().writes(7 as u64))
 	}
@@ -336,7 +367,7 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol PairStatuses (r:2 w:0)
 	fn swap_exact_assets_for_assets() -> Weight {
 		// Minimum execution time: 133_352 nanoseconds.
-		Weight::from_ref_time(134_554_000 as u64)
+		Weight::from_all(134_554_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(9 as u64))
 			.saturating_add(RocksDbWeight::get().writes(6 as u64))
 	}
@@ -345,7 +376,21 @@ impl WeightInfo for () {
 	// Storage: ZenlinkProtocol PairStatuses (r:2 w:0)
 	fn swap_assets_for_exact_assets() -> Weight {
 		// Minimum execution time: 134_003 nanoseconds.
-		Weight::from_ref_time(135_040_000 as u64)
+		Weight::from_all(135_040_000 as u64)
+			.saturating_add(RocksDbWeight::get().reads(9 as u64))
+			.saturating_add(RocksDbWeight::get().writes(6 as u64))
+	}
+
+    fn bootstrap_charge_reward() -> Weight {
+		// Minimum execution time: 134_003 nanoseconds.
+		Weight::from_all(135_040_000 as u64)
+			.saturating_add(RocksDbWeight::get().reads(9 as u64))
+			.saturating_add(RocksDbWeight::get().writes(6 as u64))
+	}
+
+    fn bootstrap_withdraw_reward() -> Weight {
+		// Minimum execution time: 134_003 nanoseconds.
+		Weight::from_all(135_040_000 as u64)
 			.saturating_add(RocksDbWeight::get().reads(9 as u64))
 			.saturating_add(RocksDbWeight::get().writes(6 as u64))
 	}

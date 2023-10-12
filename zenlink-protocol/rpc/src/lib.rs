@@ -15,7 +15,7 @@ use jsonrpsee::{
 use sp_api::ProvideRuntimeApi;
 use sp_blockchain::HeaderBackend;
 use sp_rpc::number::NumberOrHex;
-use sp_runtime::{generic::BlockId, traits::Block as BlockT};
+use sp_runtime::traits::Block as BlockT;
 use std::sync::Arc;
 
 use zenlink_protocol::{AssetBalance, PairInfo};
@@ -28,7 +28,7 @@ pub trait ZenlinkProtocolApi<BlockHash, AccountId, AssetId> {
 		&self,
 		asset_id: AssetId,
 		account: AccountId,
-		at: Option<BlockHash>,
+		at: BlockHash,
 	) -> RpcResult<NumberOrHex>;
 
 	#[method(name = "zenlinkProtocol_getPairByAssetId")]
@@ -36,7 +36,7 @@ pub trait ZenlinkProtocolApi<BlockHash, AccountId, AssetId> {
 		&self,
 		asset_0: AssetId,
 		asset_1: AssetId,
-		at: Option<BlockHash>,
+		at: BlockHash,
 	) -> RpcResult<Option<PairInfo<AccountId, NumberOrHex, AssetId>>>;
 
 	#[method(name = "zenlinkProtocol_getAmountInPrice")]
@@ -44,7 +44,7 @@ pub trait ZenlinkProtocolApi<BlockHash, AccountId, AssetId> {
 		&self,
 		supply: AssetBalance,
 		path: Vec<AssetId>,
-		at: Option<BlockHash>,
+		at: BlockHash,
 	) -> RpcResult<NumberOrHex>;
 
 	#[method(name = "zenlinkProtocol_getAmountOutPrice")]
@@ -52,7 +52,7 @@ pub trait ZenlinkProtocolApi<BlockHash, AccountId, AssetId> {
 		&self,
 		supply: AssetBalance,
 		path: Vec<AssetId>,
-		at: Option<BlockHash>,
+		at: BlockHash,
 	) -> RpcResult<NumberOrHex>;
 
 	#[method(name = "zenlinkProtocol_getEstimateLptoken")]
@@ -64,7 +64,7 @@ pub trait ZenlinkProtocolApi<BlockHash, AccountId, AssetId> {
 		amount_1_desired: AssetBalance,
 		amount_0_min: AssetBalance,
 		amount_1_min: AssetBalance,
-		at: Option<BlockHash>,
+		at: BlockHash,
 	) -> RpcResult<NumberOrHex>;
 
 	#[method(name = "zenlinkProtocol_calculateRemoveLiquidity")]
@@ -73,7 +73,7 @@ pub trait ZenlinkProtocolApi<BlockHash, AccountId, AssetId> {
 		asset_0: AssetId,
 		asset_1: AssetId,
 		amount: AssetBalance,
-		at: Option<BlockHash>,
+		at: BlockHash,
 	) -> RpcResult<Option<(AssetBalance, AssetBalance)>>;
 }
 
@@ -104,10 +104,9 @@ where
 		&self,
 		supply: AssetBalance,
 		path: Vec<AssetId>,
-		at: Option<<Block as BlockT>::Hash>,
+		at: <Block as BlockT>::Hash,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
 
 		api.get_amount_in_price(&at, supply, path)
 			.map(|price| price.into())
@@ -119,10 +118,9 @@ where
 		&self,
 		supply: AssetBalance,
 		path: Vec<AssetId>,
-		at: Option<<Block as BlockT>::Hash>,
+		at: <Block as BlockT>::Hash,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
 
 		api.get_amount_out_price(&at, supply, path)
 			.map(|price| price.into())
@@ -137,10 +135,9 @@ where
 		amount_1_desired: AssetBalance,
 		amount_0_min: AssetBalance,
 		amount_1_min: AssetBalance,
-		at: Option<<Block as BlockT>::Hash>,
+		at: <Block as BlockT>::Hash,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
 
 		api.get_estimate_lptoken(
 			&at,
@@ -159,10 +156,9 @@ where
 		&self,
 		asset_id: AssetId,
 		account: AccountId,
-		at: Option<<Block as BlockT>::Hash>,
+		at: <Block as BlockT>::Hash,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
 
 		api.get_balance(&at, asset_id, account)
 			.map(|asset_balance| asset_balance.into())
@@ -173,10 +169,9 @@ where
 		&self,
 		asset_0: AssetId,
 		asset_1: AssetId,
-		at: Option<<Block as BlockT>::Hash>,
+		at: <Block as BlockT>::Hash,
 	) -> RpcResult<Option<PairInfo<AccountId, NumberOrHex, AssetId>>> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
 
 		api.get_pair_by_asset_id(&at, asset_0, asset_1)
 			.map(|pairs| {
@@ -200,10 +195,9 @@ where
 		asset_0: AssetId,
 		asset_1: AssetId,
 		amount: AssetBalance,
-		at: Option<<Block as BlockT>::Hash>,
+		at: <Block as BlockT>::Hash,
 	) -> RpcResult<Option<(AssetBalance, AssetBalance)>> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
 
 		api.calculate_remove_liquidity(&at, asset_0, asset_1, amount)
 			.map_err(runtime_error_into_rpc_err)

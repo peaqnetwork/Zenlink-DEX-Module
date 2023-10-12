@@ -111,7 +111,6 @@ pub mod pallet {
 
 	#[pallet::pallet]
 	#[pallet::without_storage_info]
-	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
 	/// Foreign foreign storage
@@ -489,7 +488,7 @@ pub mod pallet {
 		/// - `target`: The receiver of the foreign.
 		/// - `amount`: The amount of the foreign to transfer.
 		#[pallet::call_index(2)]
-		#[pallet::weight(1_000_000)]
+		#[pallet::weight(T::WeightInfo::transfer())]
 		pub fn transfer(
 			origin: OriginFor<T>,
 			asset_id: T::AssetId,
@@ -1026,7 +1025,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(14)]
-		#[pallet::weight(100_000_000)]
+		#[pallet::weight(T::WeightInfo::bootstrap_charge_reward())]
 		#[frame_support::transactional]
 		pub fn bootstrap_charge_reward(
 			origin: OriginFor<T>,
@@ -1060,7 +1059,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(15)]
-		#[pallet::weight(100_000_000)]
+		#[pallet::weight(T::WeightInfo::bootstrap_withdraw_reward())]
 		#[frame_support::transactional]
 		pub fn bootstrap_withdraw_reward(
 			origin: OriginFor<T>,
