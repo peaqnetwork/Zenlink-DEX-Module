@@ -6,16 +6,15 @@
 #![allow(clippy::unnecessary_mut_passed)]
 
 use codec::Codec;
-use scale_info::TypeInfo;
 use sp_std::vec::Vec;
 use zenlink_protocol::{AssetBalance, PairInfo};
 
 sp_api::decl_runtime_apis! {
 	 pub trait ZenlinkProtocolApi<AccountId, AssetId>
 	 where
-		AccountId: Codec + TypeInfo,
-		AssetBalance: Codec + TypeInfo,
-		AssetId: Codec + TypeInfo
+		AccountId: Codec,
+		AssetBalance: Codec,
+		AssetId: Codec
 	 {
 
 		fn get_balance(asset_id: AssetId, owner: AccountId) -> AssetBalance;
