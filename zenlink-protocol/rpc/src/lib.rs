@@ -12,7 +12,7 @@ use jsonrpsee::{
 	types::error::{CallError, ErrorObject},
 };
 
-use sp_api::ProvideRuntimeApi;
+use sp_api::{ProvideRuntimeApi, scale_info::TypeInfo};
 use sp_blockchain::HeaderBackend;
 use sp_rpc::number::NumberOrHex;
 use sp_runtime::traits::Block as BlockT;
@@ -92,8 +92,8 @@ impl<C, Block, AccountId, AssetId>
 	ZenlinkProtocolApiServer<<Block as BlockT>::Hash, AccountId, AssetId> for ZenlinkProtocol<C, Block>
 where
 	Block: BlockT,
-	AccountId: Codec,
-	AssetId: Codec,
+	AccountId: Codec + TypeInfo,
+	AssetId: Codec + TypeInfo,
 	C: Send + Sync + 'static,
 	C: ProvideRuntimeApi<Block>,
 	C: HeaderBackend<Block>,
