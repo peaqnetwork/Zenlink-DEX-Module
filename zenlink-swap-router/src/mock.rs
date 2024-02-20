@@ -215,6 +215,7 @@ impl zenlink_protocol::Config for Test {
 	type TargetChains = ();
 	type SelfParaId = SelfParaId;
 	type WeightInfo = ();
+	type ControlOrigin = frame_system::EnsureRoot<u128>;
 }
 
 impl Config for Test {
