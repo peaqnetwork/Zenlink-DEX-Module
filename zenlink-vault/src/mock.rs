@@ -8,11 +8,11 @@ use scale_info::TypeInfo;
 use serde::{Deserialize, Serialize};
 
 use frame_support::{
-	assert_ok, pallet_prelude::GenesisBuild, parameter_types, traits::Contains, PalletId,
+	assert_ok, parameter_types, traits::Contains, PalletId,
 };
+use sp_runtime::BuildStorage;
 use sp_core::H256;
 use sp_runtime::{
-	testing::Header,
 	traits::{BlakeTwo256, IdentityLookup},
 	RuntimeDebug,
 };
@@ -23,7 +23,6 @@ use orml_traits::parameter_type_with_key;
 use crate as vault;
 use crate::primitives::VaultAssetGenerate;
 
-type UncheckedExtrinsic = frame_system::mocking::MockUncheckedExtrinsic<Test>;
 type Block = frame_system::mocking::MockBlock<Test>;
 
 parameter_types! {
@@ -73,14 +72,13 @@ pub enum CurrencyId {
 impl frame_system::Config for Test {
 	type BaseCallFilter = frame_support::traits::Everything;
 	type RuntimeOrigin = RuntimeOrigin;
-	type Index = u64;
 	type RuntimeCall = RuntimeCall;
-	type BlockNumber = u64;
+    type Nonce = u64;
+    type Block = Block;
 	type Hash = H256;
 	type Hashing = BlakeTwo256;
 	type AccountId = u128;
 	type Lookup = IdentityLookup<Self::AccountId>;
-	type Header = Header;
 	type RuntimeEvent = RuntimeEvent;
 	type BlockHashCount = BlockHashCount;
 	type DbWeight = ();
@@ -121,6 +119,11 @@ impl pallet_balances::Config for Test {
 	type MaxLocks = ();
 	type MaxReserves = MaxReserves;
 	type ReserveIdentifier = [u8; 8];
+
+    type RuntimeHoldReason = ();
+    type FreezeIdentifier = ();
+    type MaxHolds = ();
+    type MaxFreezes = ();
 }
 
 pub struct VaultAssetGenerator;
@@ -144,16 +147,13 @@ impl Config for Test {
 }
 
 frame_support::construct_runtime!(
-	pub enum Test where
-		Block = Block,
-		NodeBlock = Block,
-		UncheckedExtrinsic = UncheckedExtrinsic,
+	pub enum Test
 	{
-		System: frame_system::{Pallet, Call, Config, Storage, Event<T>} = 0,
+		System: frame_system = 0,
 
-		Balances: pallet_balances::{Pallet, Call, Storage, Config<T>, Event<T>} = 8,
-		Tokens: orml_tokens::{Pallet, Storage, Event<T>, Config<T>} = 11,
-		Vaults: vault::{Pallet, Call, Storage, Event<T>}
+		Balances: pallet_balances = 8,
+		Tokens: orml_tokens = 11,
+		Vaults: vault
 	}
 );
 
@@ -173,7 +173,7 @@ pub const TOKEN1_UNIT: u128 = 1_000_000_000_000_000_000;
 pub const TOKEN2_UNIT: u128 = 1_000_000_000_000;
 
 pub fn new_test_ext() -> sp_io::TestExternalities {
-	let mut t = frame_system::GenesisConfig::default().build_storage::<Test>().unwrap().into();
+	let mut t = frame_system::GenesisConfig::<Test>::default().build_storage().unwrap().into();
 	pallet_balances::GenesisConfig::<Test> { balances: vec![(ALICE, u128::MAX)] }
 		.assimilate_storage(&mut t)
 		.unwrap();
