@@ -22,10 +22,10 @@ orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-librar
 
 [dev-dependencies]
 orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-v1.1.0", default-features = false }
-pallet-balances = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
+pallet-balances = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
 sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
 sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
-pallet-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0"}
+pallet-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
 
 [features]
 default = ["std"]
@@ -40,6 +40,9 @@ std = [
     "sp-std/std",
     "sp-arithmetic/std",
     "orml-tokens/std",
+	"pallet-balances/std",
+	"pallet-timestamp/std",
+	"orml-traits/std",
 ]
 
 runtime-benchmarks = [

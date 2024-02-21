@@ -15213,10 +15213,10 @@ dependencies = [
  "jsonrpsee",
  "parity-scale-codec",
  "serde",
- "sp-api 4.0.0-dev (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
- "sp-blockchain 4.0.0-dev (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
- "sp-rpc 6.0.0 (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
- "sp-runtime 7.0.0",
+ "sp-api 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
+ "sp-blockchain 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
+ "sp-rpc 6.0.0 (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
+ "sp-runtime 24.0.0",
  "zenlink-stable-amm-runtime-api",
 ]
 
@@ -15225,8 +15225,8 @@ name = "zenlink-stable-amm-runtime-api"
 version = "0.1.0"
 dependencies = [
  "parity-scale-codec",
- "sp-api 4.0.0-dev (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
- "sp-std 5.0.0",
+ "sp-api 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
+ "sp-std 8.0.0",
  "zenlink-stable-amm",
 ]
 

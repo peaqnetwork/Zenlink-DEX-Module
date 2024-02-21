@@ -156,9 +156,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		let price = api.get_virtual_price(&at, pool_id).map_err(runtime_error_into_rpc_err)?;
+		let price = api.get_virtual_price(at, pool_id).map_err(runtime_error_into_rpc_err)?;
 
 		try_into_rpc_balance(price)
 	}
@@ -169,9 +169,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		let price = api.get_a(&at, pool_id).map_err(runtime_error_into_rpc_err)?;
+		let price = api.get_a(at, pool_id).map_err(runtime_error_into_rpc_err)?;
 
 		try_into_rpc_balance(price)
 	}
@@ -182,9 +182,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		let price = api.get_a_precise(&at, pool_id).map_err(runtime_error_into_rpc_err)?;
+		let price = api.get_a_precise(at, pool_id).map_err(runtime_error_into_rpc_err)?;
 
 		try_into_rpc_balance(price)
 	}
@@ -195,9 +195,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<Vec<CurrencyId>> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		api.get_currencies(&at, pool_id).map_err(runtime_error_into_rpc_err)
+		api.get_currencies(at, pool_id).map_err(runtime_error_into_rpc_err)
 	}
 
 	fn get_currency(
@@ -207,9 +207,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<CurrencyId> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		api.get_currency(&at, pool_id, index).map_or_else(
+		api.get_currency(at, pool_id, index).map_or_else(
 			|e| Err(runtime_error_into_rpc_err(e)),
 			|v| v.ok_or(runtime_error_into_rpc_err("not found")),
 		)
@@ -221,9 +221,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<CurrencyId> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		api.get_lp_currency(&at, pool_id).map_or_else(
+		api.get_lp_currency(at, pool_id).map_or_else(
 			|e| Err(runtime_error_into_rpc_err(e)),
 			|v| v.ok_or(runtime_error_into_rpc_err("not found")),
 		)
@@ -236,9 +236,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<u32> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		let currencies = api.get_currencies(&at, pool_id).map_err(runtime_error_into_rpc_err)?;
+		let currencies = api.get_currencies(at, pool_id).map_err(runtime_error_into_rpc_err)?;
 
 		for (i, c) in currencies.iter().enumerate() {
 			if *c == currency {
@@ -254,9 +254,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<Vec<NumberOrHex>> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		api.get_currency_precision_multipliers(&at, pool_id)
+		api.get_currency_precision_multipliers(at, pool_id)
 			.map_err(runtime_error_into_rpc_err)?
 			.iter()
 			.map(|b| try_into_rpc_balance(*b))
@@ -269,9 +269,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<Vec<NumberOrHex>> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		api.get_currency_balances(&at, pool_id)
+		api.get_currency_balances(at, pool_id)
 			.map_err(runtime_error_into_rpc_err)?
 			.iter()
 			.map(|b| try_into_rpc_balance(*b))
@@ -284,9 +284,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<u32> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		api.get_number_of_currencies(&at, pool_id).map_err(runtime_error_into_rpc_err)
+		api.get_number_of_currencies(at, pool_id).map_err(runtime_error_into_rpc_err)
 	}
 
 	fn get_admin_balances(
@@ -295,9 +295,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<Vec<NumberOrHex>> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		api.get_admin_balances(&at, pool_id)
+		api.get_admin_balances(at, pool_id)
 			.map_err(runtime_error_into_rpc_err)?
 			.iter()
 			.map(|b| try_into_rpc_balance(*b))
@@ -311,9 +311,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		let balances = api.get_admin_balances(&at, pool_id).map_err(runtime_error_into_rpc_err)?;
+		let balances = api.get_admin_balances(at, pool_id).map_err(runtime_error_into_rpc_err)?;
 
 		for (i, balance) in balances.iter().enumerate() {
 			if i as u32 == index {
@@ -332,10 +332,10 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
 		let amount = api
-			.calculate_currency_amount(&at, pool_id, amounts, deposit)
+			.calculate_currency_amount(at, pool_id, amounts, deposit)
 			.map_err(runtime_error_into_rpc_err)?;
 
 		try_into_rpc_balance(amount)
@@ -350,10 +350,10 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
 		let amount = api
-			.calculate_swap(&at, pool_id, in_index, out_index, in_amount)
+			.calculate_swap(at, pool_id, in_index, out_index, in_amount)
 			.map_err(runtime_error_into_rpc_err)?;
 
 		try_into_rpc_balance(amount)
@@ -366,9 +366,9 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<Vec<NumberOrHex>> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
-		api.calculate_remove_liquidity(&at, pool_id, amount)
+		api.calculate_remove_liquidity(at, pool_id, amount)
 			.map_err(runtime_error_into_rpc_err)?
 			.iter()
 			.map(|b| try_into_rpc_balance(*b))
@@ -383,10 +383,10 @@ where
 		at: Option<<Block as BlockT>::Hash>,
 	) -> RpcResult<NumberOrHex> {
 		let api = self.client.runtime_api();
-		let at = BlockId::hash(at.unwrap_or_else(|| self.client.info().best_hash));
+		let at = at.unwrap_or_else(|| self.client.info().best_hash);
 
 		let amount = api
-			.calculate_remove_liquidity_one_currency(&at, pool_id, amount, index)
+			.calculate_remove_liquidity_one_currency(at, pool_id, amount, index)
 			.map_err(runtime_error_into_rpc_err)?;
 
 		try_into_rpc_balance(amount)
