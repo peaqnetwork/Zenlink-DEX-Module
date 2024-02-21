@@ -49,8 +49,9 @@ mod primitives;
 mod utils;
 mod weights;
 
+use codec::Codec;
 use frame_support::{
-	dispatch::{Codec, DispatchResult},
+	dispatch::{DispatchResult},
 	pallet_prelude::*,
 	traits::UnixTime,
 	transactional, PalletId,
@@ -118,7 +119,6 @@ pub mod pallet {
 
 	#[pallet::pallet]
 	#[pallet::without_storage_info]
-	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
 	/// The id of next pool
@@ -462,7 +462,7 @@ pub mod pallet {
 			amounts: Vec<Balance>,
 			min_mint_amount: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 
@@ -495,7 +495,7 @@ pub mod pallet {
 			in_amount: Balance,
 			min_out_amount: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 
@@ -532,7 +532,7 @@ pub mod pallet {
 			lp_amount: Balance,
 			min_amounts: Vec<Balance>,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 
@@ -563,7 +563,7 @@ pub mod pallet {
 			index: u32,
 			min_amount: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 
@@ -594,7 +594,7 @@ pub mod pallet {
 			amounts: Vec<Balance>,
 			max_burn_amount: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 
@@ -628,7 +628,7 @@ pub mod pallet {
 			base_amounts: Vec<Balance>,
 			min_to_mint: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let now = frame_system::Pallet::<T>::block_number();
@@ -668,7 +668,7 @@ pub mod pallet {
 			min_amounts_meta: Vec<Balance>,
 			min_amounts_base: Vec<Balance>,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let now = frame_system::Pallet::<T>::block_number();
@@ -709,7 +709,7 @@ pub mod pallet {
 			i: u32,
 			min_amount: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let now = frame_system::Pallet::<T>::block_number();
@@ -752,7 +752,7 @@ pub mod pallet {
 			dx: Balance,
 			min_dy: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let now = frame_system::Pallet::<T>::block_number();
@@ -796,7 +796,7 @@ pub mod pallet {
 			dx: Balance,
 			min_dy: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let now = frame_system::Pallet::<T>::block_number();
@@ -827,7 +827,7 @@ pub mod pallet {
 			dx: Balance,
 			min_dy: Balance,
 			to: T::AccountId,
-			deadline: T::BlockNumber,
+			deadline: BlockNumberFor<T>,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let now = frame_system::Pallet::<T>::block_number();

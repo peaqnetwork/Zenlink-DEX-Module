@@ -15189,21 +15189,21 @@ dependencies = [
 name = "zenlink-stable-amm"
 version = "0.1.0"
 dependencies = [
- "frame-benchmarking 4.0.0-dev (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
- "frame-support 4.0.0-dev (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
- "frame-system 4.0.0-dev (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
- "orml-tokens 0.4.1-dev (git+https://github.com/peaqnetwork/open-runtime-module-library?branch=peaq-polkadot-v0.9.43)",
- "orml-traits 0.4.1-dev (git+https://github.com/peaqnetwork/open-runtime-module-library?branch=peaq-polkadot-v0.9.43)",
- "pallet-balances 4.0.0-dev (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
- "pallet-timestamp 4.0.0-dev (git+https://github.com/peaqnetwork/substrate?branch=peaq-polkadot-v0.9.43)",
+ "frame-benchmarking 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
+ "frame-support 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
+ "frame-system 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
+ "orml-tokens 0.4.1-dev (git+https://github.com/peaqnetwork/open-runtime-module-library?branch=peaq-polkadot-v1.1.0)",
+ "orml-traits 0.4.1-dev (git+https://github.com/peaqnetwork/open-runtime-module-library?branch=peaq-polkadot-v1.1.0)",
+ "pallet-balances 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
+ "pallet-timestamp 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=release-polkadot-v1.1.0)",
  "parity-scale-codec",
  "scale-info",
  "serde",
- "sp-arithmetic 6.0.0",
- "sp-core 7.0.0",
- "sp-io 7.0.0",
- "sp-runtime 7.0.0",
- "sp-std 5.0.0",
+ "sp-arithmetic 16.0.0",
+ "sp-core 21.0.0",
+ "sp-io 23.0.0",
+ "sp-runtime 24.0.0",
+ "sp-std 8.0.0",
 ]
 
 [[package]]

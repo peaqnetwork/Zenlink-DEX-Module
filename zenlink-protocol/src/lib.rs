@@ -237,32 +237,6 @@ pub mod pallet {
    			<FeeMeta<T>>::put((&self.fee_receiver, &self.fee_point));
         }
     }
-/*
- * 
- *     #[pallet::genesis_build]
- *     impl<T: Config> GenesisBuild<T> for GenesisConfig<T> {
- *         fn build(&self) {
- *             <FeeMeta<T>>::put((&self.fee_receiver, &self.fee_point));
- *         }
- *     }
- * 
- *     #[cfg(feature = "std")]
- *     impl<T: Config> GenesisConfig<T> {
- *         /// Direct implementation of `GenesisBuild::build_storage`.
- *         ///
- *         /// Kept in order not to break dependency.
- *         pub fn build_storage(&self) -> Result<sp_runtime::Storage, String> {
- *             <Self as GenesisBuild<T>>::build_storage(self)
- *         }
- * 
- *         /// Direct implementation of `GenesisBuild::assimilate_storage`.
- *         ///
- *         /// Kept in order not to break dependency.
- *         pub fn assimilate_storage(&self, storage: &mut sp_runtime::Storage) -> Result<(), String> {
- *             <Self as GenesisBuild<T>>::assimilate_storage(self, storage)
- *         }
- *     }
- */
 
 	#[pallet::event]
 	#[pallet::generate_deposit(pub(super) fn deposit_event)]
