@@ -3,7 +3,6 @@
 use codec::{Decode, Encode, MaxEncodedLen};
 use scale_info::TypeInfo;
 
-#[cfg(feature = "std")]
 use serde::{Deserialize, Serialize};
 use sp_runtime::RuntimeDebug;
 use sp_std::{convert::TryFrom, prelude::*};
@@ -47,8 +46,9 @@ impl_tokensymbol! {
 	Ord,
 	TypeInfo,
 	MaxEncodedLen,
+    Serialize,
+    Deserialize,
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub enum TokenSymbol {
 	Dev("dev",12) = 0,
 	LOCAL1("local1",12) = 1,
@@ -73,8 +73,9 @@ pub enum TokenSymbol {
 	PartialOrd,
 	Ord,
 	TypeInfo,
+    Serialize,
+    Deserialize,
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 #[non_exhaustive]
 pub enum CurrencyId {
 	Native(TokenSymbol),

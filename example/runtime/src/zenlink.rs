@@ -9,12 +9,16 @@ use primitives::*;
 use zenlink_protocol::*;
 use zenlink_stable_amm::traits::{StablePoolLpCurrencyIdGenerate, ValidateCurrency};
 use zenlink_vault::VaultAssetGenerate;
+use cumulus_primitives_core::Parachain;
+use crate::xcm_config::RelayNetwork;
+use cumulus_primitives_core::GlobalConsensus;
+use cumulus_primitives_core::X2;
 
 parameter_types! {
 	pub SelfParaId: u32 = ParachainInfo::parachain_id().into();
 	pub const ZenlinkPalletId: PalletId = PalletId(*b"/zenlink");
 	pub ZenlinkRegisteredParaChains: Vec<(MultiLocation, u128)> = vec![
-		(make_x2_location(2001), 10_000_000_000),
+        (X2(GlobalConsensus(RelayNetwork::get()), Parachain(2001)).into(), 10_000_000_000),
 	];
 	pub const StringLimit: u32 = 50;
 	pub const StableAmmPalletId: PalletId = PalletId(*b"bf/stamm");

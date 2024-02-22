@@ -6,12 +6,12 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-serde = { version = "1.0.119", optional = true }
+serde = { version = "1.0.119", features = ["derive"], default-features = false }
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false }
 scale-info = { version = "2.1.2", default-features = false, features = ["derive"] }
 
-sp-runtime = { git = "https://github.com/peaqnetwork/substrate", branch = "peaq-polkadot-v0.9.43",default-features = false }
-sp-std = { git = "https://github.com/peaqnetwork/substrate", branch = "peaq-polkadot-v0.9.43", default-features = false }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0",default-features = false }
+sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
 
 zenlink-protocol = { path = "../../zenlink-protocol", default-features = false }
 
@@ -19,7 +19,7 @@ zenlink-protocol = { path = "../../zenlink-protocol", default-features = false }
 [features]
 default = ["std"]
 std = [
-	"serde",
+	"serde/std",
 	"codec/std",
 	"scale-info/std",
 	"sp-runtime/std",
