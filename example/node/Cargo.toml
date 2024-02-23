@@ -28,6 +28,7 @@ sc-consensus = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "
 sc-executor = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sc-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sc-network-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
+sc-network-sync = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sc-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sc-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sc-sysinfo = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
@@ -36,6 +37,7 @@ sc-tracing = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "re
 sc-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sc-transaction-pool-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
+sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sp-block-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
 sp-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }

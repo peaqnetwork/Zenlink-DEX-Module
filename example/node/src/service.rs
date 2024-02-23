@@ -17,18 +17,22 @@ use cumulus_client_service::{
 use cumulus_primitives_core::ParaId;
 use cumulus_relay_chain_inprocess_interface::build_inprocess_relay_chain;
 use cumulus_relay_chain_interface::{RelayChainError, RelayChainInterface, RelayChainResult};
-use cumulus_relay_chain_minimal_node::build_minimal_relay_chain_node;
+use cumulus_client_service::build_relay_chain_interface;
 
 // Substrate Imports
 use sc_executor::NativeElseWasmExecutor;
 use sc_network::NetworkService;
-use sc_network_common::service::NetworkBlock;
+use sc_network::NetworkBlock;
+use sc_consensus::{ImportQueue, LongestChain};
 use sc_service::{Configuration, PartialComponents, TFullBackend, TFullClient, TaskManager};
 use sc_telemetry::{Telemetry, TelemetryHandle, TelemetryWorker, TelemetryWorkerHandle};
-use sp_keystore::SyncCryptoStorePtr;
+use sp_keystore::KeystorePtr;
 use substrate_prometheus_endpoint::Registry;
+use cumulus_client_consensus_common::ParachainBlockImport as TParachainBlockImport;
 
 use polkadot_service::CollatorPair;
+use polkadot_service::FullBackend;
+use sc_network_sync::SyncingService;
 
 /// Native executor type.
 pub struct ParachainNativeExecutor;
@@ -51,6 +55,14 @@ type ParachainClient = TFullClient<Block, RuntimeApi, ParachainExecutor>;
 
 type ParachainBackend = TFullBackend<Block>;
 
+pub type MaybeFullSelectChain = Option<LongestChain<FullBackend, Block>>;
+
+type ParachainBlockImport = TParachainBlockImport<Block, Arc<ParachainClient>, ParachainBackend>;
+
+pub type HostFunctions = (
+    frame_benchmarking::benchmarking::HostFunctions,
+);
+
 /// Starts a `ServiceBuilder` for a full service.
 ///
 /// Use this macro if you don't actually need the full service, but just the builder in order to
@@ -61,10 +73,10 @@ pub fn new_partial(
 	PartialComponents<
 		ParachainClient,
 		ParachainBackend,
-		(),
-		sc_consensus::DefaultImportQueue<Block, ParachainClient>,
+        MaybeFullSelectChain,
+		sc_consensus::DefaultImportQueue<Block>,
 		sc_transaction_pool::FullPool<Block, ParachainClient>,
-		(Option<Telemetry>, Option<TelemetryWorkerHandle>),
+		(ParachainBlockImport, Option<Telemetry>, Option<TelemetryWorkerHandle>),
 	>,
 	sc_service::Error,
 > {
@@ -108,9 +120,11 @@ pub fn new_partial(
 		task_manager.spawn_essential_handle(),
 		client.clone(),
 	);
+    let block_import = ParachainBlockImport::new(client.clone(), backend.clone());
 
 	let import_queue = build_import_queue(
 		client.clone(),
+        block_import.clone(),
 		config,
 		telemetry.as_ref().map(|telemetry| telemetry.handle()),
 		&task_manager,
@@ -123,30 +137,13 @@ pub fn new_partial(
 		keystore_container,
 		task_manager,
 		transaction_pool,
-		select_chain: (),
-		other: (telemetry, telemetry_worker_handle),
+		select_chain: None,
+		other: (
+            block_import,
+            telemetry, 
+            telemetry_worker_handle,
+            ),
 	})
-}
-
-async fn build_relay_chain_interface(
-	polkadot_config: Configuration,
-	parachain_config: &Configuration,
-	telemetry_worker_handle: Option<TelemetryWorkerHandle>,
-	task_manager: &mut TaskManager,
-	collator_options: CollatorOptions,
-	hwbench: Option<sc_sysinfo::HwBench>,
-) -> RelayChainResult<(Arc<(dyn RelayChainInterface + 'static)>, Option<CollatorPair>)> {
-	match collator_options.relay_chain_rpc_url {
-		Some(relay_chain_url) =>
-			build_minimal_relay_chain_node(polkadot_config, task_manager, relay_chain_url).await,
-		None => build_inprocess_relay_chain(
-			polkadot_config,
-			parachain_config,
-			telemetry_worker_handle,
-			task_manager,
-			hwbench,
-		),
-	}
 }
 
 /// Start a node with the given parachain `Configuration` and relay chain `Configuration`.
@@ -163,7 +160,7 @@ async fn start_node_impl(
 	let parachain_config = prepare_node_config(parachain_config);
 
 	let params = new_partial(&parachain_config)?;
-	let (mut telemetry, telemetry_worker_handle) = params.other;
+    let (parachain_block_import, mut telemetry, telemetry_worker_handle) = params.other;
 
 	let client = params.client.clone();
 	let backend = params.backend.clone();
@@ -178,10 +175,7 @@ async fn start_node_impl(
 		hwbench.clone(),
 	)
 	.await
-	.map_err(|e| match e {
-		RelayChainError::ServiceError(polkadot_service::Error::Sub(x)) => x,
-		s => s.to_string().into(),
-	})?;
+    .map_err(|e| sc_service::Error::Application(Box::new(e) as Box<_>))?;
 
 	let block_announce_validator = BlockAnnounceValidator::new(relay_chain_interface.clone(), id);
 
@@ -189,18 +183,20 @@ async fn start_node_impl(
 	let validator = parachain_config.role.is_authority();
 	let prometheus_registry = parachain_config.prometheus_registry().cloned();
 	let transaction_pool = params.transaction_pool.clone();
-	let import_queue = cumulus_client_service::SharedImportQueue::new(params.import_queue);
-	let (network, system_rpc_tx, tx_handler_controller, start_network) =
+    let import_queue_service = params.import_queue.service();
+    let net_config = sc_network::config::FullNetworkConfiguration::new(&parachain_config.network);
+    let (network, system_rpc_tx, tx_handler_controller, network_starter, sync_service) =
 		sc_service::build_network(sc_service::BuildNetworkParams {
 			config: &parachain_config,
+            net_config,
 			client: client.clone(),
 			transaction_pool: transaction_pool.clone(),
 			spawn_handle: task_manager.spawn_handle(),
-			import_queue: import_queue.clone(),
+            import_queue: params.import_queue,
 			block_announce_validator_builder: Some(Box::new(|_| {
 				Box::new(block_announce_validator)
 			})),
-			warp_sync: None,
+            warp_sync_params: None,
 		})?;
 
 	let rpc_builder = {
@@ -224,11 +220,12 @@ async fn start_node_impl(
 		transaction_pool: transaction_pool.clone(),
 		task_manager: &mut task_manager,
 		config: parachain_config,
-		keystore: params.keystore_container.sync_keystore(),
+		keystore: params.keystore_container.keystore(),
 		backend: backend.clone(),
 		network: network.clone(),
-		system_rpc_tx,
-		tx_handler_controller,
+		system_rpc_tx: system_rpc_tx,
+        sync_service: sync_service.clone(),
+        tx_handler_controller,
 		telemetry: telemetry.as_mut(),
 	})?;
 
@@ -246,22 +243,29 @@ async fn start_node_impl(
 	}
 
 	let announce_block = {
-		let network = network.clone();
-		Arc::new(move |hash, data| network.announce_block(hash, data))
+        let sync_service = sync_service.clone();                                                         
+        Arc::new(move |hash, data| sync_service.announce_block(hash, data))                              
 	};
+
+    let overseer_handle = relay_chain_interface
+        .overseer_handle()
+        .map_err(|e| sc_service::Error::Application(Box::new(e)))?;
 
 	let relay_chain_slot_duration = Duration::from_secs(6);
 
 	if validator {
+        let block_import = ParachainBlockImport::new(client.clone(), backend.clone());
+
 		let parachain_consensus = build_consensus(
 			client.clone(),
+            block_import,
 			prometheus_registry.as_ref(),
 			telemetry.as_ref().map(|t| t.handle()),
 			&task_manager,
 			relay_chain_interface.clone(),
 			transaction_pool,
-			network,
-			params.keystore_container.sync_keystore(),
+			sync_service.clone(),
+            params.keystore_container.keystore(),
 			force_authoring,
 			id,
 		)?;
@@ -276,7 +280,9 @@ async fn start_node_impl(
 			relay_chain_interface,
 			spawner,
 			parachain_consensus,
-			import_queue,
+			import_queue: import_queue_service,
+   			sync_service: sync_service.clone(),
+            recovery_handle: Box::new(overseer_handle),
 			collator_key: collator_key.expect("Command line arguments do not allow this. qed"),
 			relay_chain_slot_duration,
 		};
@@ -290,13 +296,15 @@ async fn start_node_impl(
 			para_id: id,
 			relay_chain_interface,
 			relay_chain_slot_duration,
-			import_queue,
+			import_queue: import_queue_service,
+   			sync_service: sync_service.clone(),
+            recovery_handle: Box::new(overseer_handle),
 		};
 
 		start_full_node(params)?;
 	}
 
-	start_network.start_network();
+    network_starter.start_network();
 
 	Ok((task_manager, client))
 }
@@ -304,10 +312,11 @@ async fn start_node_impl(
 /// Build the import queue for the parachain runtime.
 fn build_import_queue(
 	client: Arc<ParachainClient>,
+    block_import: ParachainBlockImport,
 	config: &Configuration,
 	telemetry: Option<TelemetryHandle>,
 	task_manager: &TaskManager,
-) -> Result<sc_consensus::DefaultImportQueue<Block, ParachainClient>, sc_service::Error> {
+) -> Result<sc_consensus::DefaultImportQueue<Block>, sc_service::Error> {
 	let slot_duration = cumulus_client_consensus_aura::slot_duration(&*client)?;
 
 	cumulus_client_consensus_aura::import_queue::<
@@ -318,7 +327,7 @@ fn build_import_queue(
 		_,
 		_,
 	>(cumulus_client_consensus_aura::ImportQueueParams {
-		block_import: client.clone(),
+		block_import,
 		client: client.clone(),
 		create_inherent_data_providers: move |_, _| async move {
 			let timestamp = sp_timestamp::InherentDataProvider::from_system_time();
@@ -340,13 +349,14 @@ fn build_import_queue(
 
 fn build_consensus(
 	client: Arc<ParachainClient>,
+    block_import: ParachainBlockImport,
 	prometheus_registry: Option<&Registry>,
 	telemetry: Option<TelemetryHandle>,
 	task_manager: &TaskManager,
 	relay_chain_interface: Arc<dyn RelayChainInterface>,
 	transaction_pool: Arc<sc_transaction_pool::FullPool<Block, ParachainClient>>,
-	sync_oracle: Arc<NetworkService<Block, Hash>>,
-	keystore: SyncCryptoStorePtr,
+	sync_oracle: Arc<SyncingService<Block>>,
+	keystore: KeystorePtr,
 	force_authoring: bool,
 	id: ParaId,
 ) -> Result<Box<dyn ParachainConsensus<Block>>, sc_service::Error> {
@@ -389,10 +399,10 @@ fn build_consensus(
 				Ok((slot, timestamp, parachain_inherent))
 			}
 		},
-		block_import: client.clone(),
+		block_import: block_import,
 		para_client: client,
 		backoff_authoring_blocks: Option::<()>::None,
-		sync_oracle,
+        sync_oracle,
 		keystore,
 		force_authoring,
 		slot_duration,
