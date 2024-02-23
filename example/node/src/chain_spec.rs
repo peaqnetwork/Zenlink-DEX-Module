@@ -8,7 +8,7 @@ use zenlink_template_runtime::{AccountId, AuraId, Signature, EXISTENTIAL_DEPOSIT
 
 /// Specialized `ChainSpec` for the normal parachain runtime.
 pub type ChainSpec =
-	sc_service::GenericChainSpec<zenlink_template_runtime::GenesisConfig, Extensions>;
+	sc_service::GenericChainSpec<zenlink_template_runtime::RuntimeGenesisConfig, Extensions>;
 
 /// The default XCM version to set in genesis config.
 const SAFE_XCM_VERSION: u32 = xcm::prelude::XCM_VERSION;
@@ -181,8 +181,8 @@ fn testnet_genesis(
 	invulnerables: Vec<(AccountId, AuraId)>,
 	endowed_accounts: Vec<AccountId>,
 	id: ParaId,
-) -> zenlink_template_runtime::GenesisConfig {
-	zenlink_template_runtime::GenesisConfig {
+) -> zenlink_template_runtime::RuntimeGenesisConfig {
+	zenlink_template_runtime::RuntimeGenesisConfig {
 		system: zenlink_template_runtime::SystemConfig {
 			code: zenlink_template_runtime::WASM_BINARY
 				.expect("WASM binary was not build, please build it!")

@@ -1,27 +1,26 @@
-use std::net::SocketAddr;
 
-use codec::Encode;
-use cumulus_client_cli::generate_genesis_block;
+
+
+
 use cumulus_primitives_core::ParaId;
 use frame_benchmarking_cli::{BenchmarkCmd, SUBSTRATE_REFERENCE_HARDWARE};
-use log::{info, warn};
+use log::{info};
 use sc_cli::{
 	ChainSpec, CliConfiguration, DefaultConfigurationValues, ImportParams, KeystoreParams,
-	NetworkParams, Result, RuntimeVersion, SharedParams, SubstrateCli,
+	NetworkParams, Result, SharedParams, SubstrateCli,
 };
 use sc_service::{
 	config::{BasePath, PrometheusConfig},
-	TaskManager,
+
 };
-use sp_core::hexdisplay::HexDisplay;
-use sp_runtime::traits::{AccountIdConversion, Block as BlockT};
+
+use sp_runtime::traits::{AccountIdConversion};
 use zenlink_template_runtime::Block;
-use sc_executor::{sp_wasm_interface::ExtendedHostFunctions, NativeExecutionDispatch};
 
 use crate::{
 	chain_spec,
 	cli::{Cli, RelayChainCli, Subcommand},
-	service::{new_partial, ParachainNativeExecutor, HostFunctions},
+	service::{new_partial, HostFunctions},
 };
 
 fn load_spec(id: &str) -> std::result::Result<Box<dyn ChainSpec>, String> {
@@ -172,7 +171,7 @@ pub fn run() -> Result<()> {
 		Some(Subcommand::ExportGenesisState(cmd)) => {
 			let runner = cli.create_runner(cmd)?;
 			runner.sync_run(|config| {
-				let spec = cli.load_spec(&cmd.shared_params.chain.clone().unwrap_or_default())?;
+				let _spec = cli.load_spec(&cmd.shared_params.chain.clone().unwrap_or_default())?;
                 let partials = new_partial(&config)?;
                 cmd.run(&*config.chain_spec, &*partials.client)
 			})

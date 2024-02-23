@@ -5,7 +5,7 @@ use std::{sync::Arc, time::Duration};
 
 use cumulus_client_cli::CollatorOptions;
 // Local Runtime Types
-use zenlink_template_runtime::{opaque::Block, Hash, RuntimeApi};
+use zenlink_template_runtime::{opaque::Block, RuntimeApi};
 
 // Cumulus Imports
 use cumulus_client_consensus_aura::{AuraConsensus, BuildAuraConsensusParams, SlotProportion};
@@ -15,13 +15,13 @@ use cumulus_client_service::{
 	prepare_node_config, start_collator, start_full_node, StartCollatorParams, StartFullNodeParams,
 };
 use cumulus_primitives_core::ParaId;
-use cumulus_relay_chain_inprocess_interface::build_inprocess_relay_chain;
-use cumulus_relay_chain_interface::{RelayChainError, RelayChainInterface, RelayChainResult};
+
+use cumulus_relay_chain_interface::{RelayChainInterface};
 use cumulus_client_service::build_relay_chain_interface;
 
 // Substrate Imports
 use sc_executor::NativeElseWasmExecutor;
-use sc_network::NetworkService;
+
 use sc_network::NetworkBlock;
 use sc_consensus::{ImportQueue, LongestChain};
 use sc_service::{Configuration, PartialComponents, TFullBackend, TFullClient, TaskManager};
@@ -30,7 +30,7 @@ use sp_keystore::KeystorePtr;
 use substrate_prometheus_endpoint::Registry;
 use cumulus_client_consensus_common::ParachainBlockImport as TParachainBlockImport;
 
-use polkadot_service::CollatorPair;
+
 use polkadot_service::FullBackend;
 use sc_network_sync::SyncingService;
 
@@ -254,11 +254,9 @@ async fn start_node_impl(
 	let relay_chain_slot_duration = Duration::from_secs(6);
 
 	if validator {
-        let block_import = ParachainBlockImport::new(client.clone(), backend.clone());
-
 		let parachain_consensus = build_consensus(
 			client.clone(),
-            block_import,
+            parachain_block_import,
 			prometheus_registry.as_ref(),
 			telemetry.as_ref().map(|t| t.handle()),
 			&task_manager,
