@@ -69,6 +69,10 @@ impl<T: Config> GenerateLpAssetId<AssetId> for PairLpGenerate<T> {
 		let index = currency_0 + currency_1 + discr;
 		Some(AssetId { chain_id: T::SelfParaId::get(), asset_type: LOCAL, asset_index: index })
 	}
+
+    fn create_lp_asset(_asset_0: &AssetId, _asset_1: &AssetId) -> Option<()> {
+        Some(())
+    }
 }
 
 impl Into<MultiLocation> for AssetId {

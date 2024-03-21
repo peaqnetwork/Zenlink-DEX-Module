@@ -5,12 +5,15 @@ use super::*;
 
 pub trait GenerateLpAssetId<AssetId> {
 	fn generate_lp_asset_id(asset_0: AssetId, asset_1: AssetId) -> Option<AssetId>;
+    fn create_lp_asset(asset_0: &AssetId, asset_1: &AssetId) -> Option<()>;
 }
 
 pub trait LocalAssetHandler<AccountId> {
 	fn local_balance_of(asset_id: AssetId, who: &AccountId) -> AssetBalance;
 
 	fn local_total_supply(asset_id: AssetId) -> AssetBalance;
+
+    fn local_minimum_balance(asset_id: AssetId) -> AssetBalance;
 
 	fn local_is_exists(asset_id: AssetId) -> bool;
 
@@ -48,6 +51,10 @@ impl<AccountId> LocalAssetHandler<AccountId> for () {
 		Default::default()
 	}
 
+    fn local_minimum_balance(_asset_id: AssetId) -> AssetBalance {
+        Default::default()
+    }
+
 	fn local_is_exists(_asset_id: AssetId) -> bool {
 		false
 	}
@@ -73,6 +80,8 @@ pub trait OtherAssetHandler<AccountId> {
 	fn other_balance_of(asset_id: AssetId, who: &AccountId) -> AssetBalance;
 
 	fn other_total_supply(asset_id: AssetId) -> AssetBalance;
+
+    fn other_minimum_balance(asset_id: AssetId) -> AssetBalance;
 
 	fn other_is_exists(asset_id: AssetId) -> bool;
 
@@ -109,6 +118,10 @@ impl<AccountId> OtherAssetHandler<AccountId> for () {
 	fn other_total_supply(_asset_id: AssetId) -> AssetBalance {
 		Default::default()
 	}
+
+    fn other_minimum_balance(_asset_id: AssetId) -> AssetBalance {
+        Default::default()
+    }
 
 	fn other_is_exists(_asset_id: AssetId) -> bool {
 		false
