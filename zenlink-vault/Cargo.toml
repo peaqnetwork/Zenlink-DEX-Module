@@ -11,22 +11,22 @@ serde = { version = "1.0.188", default-features = false }
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false }
 scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
 
-frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "release-polkadot-v1.1.0" }
-sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-polkadot-v1.1.0" }
-frame-support = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-polkadot-v1.1.0" }
-frame-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-polkadot-v1.1.0" }
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-polkadot-v1.1.0" }
-sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
-sp-arithmetic = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
+frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "release-polkadot-v1.3.0" }
+sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-polkadot-v1.3.0" }
+frame-support = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-polkadot-v1.3.0" }
+frame-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-polkadot-v1.3.0" }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-polkadot-v1.3.0" }
+sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.3.0", default-features = false }
+sp-arithmetic = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.3.0", default-features = false }
 
-orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-v1.1.0", default-features = false }
+orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "test-peaq-polkadot-v1.3.0", default-features = false }
 
 [dev-dependencies]
-orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-v1.1.0", default-features = false }
-pallet-balances = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0" }
-sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
-sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
-pallet-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0"}
+orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "test-peaq-polkadot-v1.3.0", default-features = false }
+pallet-balances = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.3.0" }
+sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.3.0", default-features = false }
+sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.3.0", default-features = false }
+pallet-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.3.0"}
 
 [features]
 default = ["std"]

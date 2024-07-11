@@ -10,8 +10,8 @@ serde = { version = "1.0.119", features = ["derive"], default-features = false }
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false }
 scale-info = { version = "2.1.2", default-features = false, features = ["derive"] }
 
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0",default-features = false }
-sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.1.0", default-features = false }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.3.0",default-features = false }
+sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-polkadot-v1.3.0", default-features = false }
 
 zenlink-protocol = { path = "../../zenlink-protocol", default-features = false }
 
