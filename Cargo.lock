@@ -15435,6 +15435,7 @@ version = "0.4.4"
 dependencies = [
  "jsonrpsee",
  "parity-scale-codec",
+ "scale-info",
  "serde",
  "sp-api 4.0.0-dev (git+https://github.com/peaqnetwork/polkadot-sdk?branch=peaq-polkadot-v1.7.2)",
  "sp-blockchain",

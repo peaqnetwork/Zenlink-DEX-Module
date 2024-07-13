@@ -12,7 +12,8 @@ use jsonrpsee::{
 	types::error::{CallError, ErrorObject},
 };
 
-use sp_api::{ProvideRuntimeApi, scale_info::TypeInfo};
+use sp_api::ProvideRuntimeApi;
+use scale_info::TypeInfo;
 use sp_blockchain::HeaderBackend;
 use sp_rpc::number::NumberOrHex;
 use sp_runtime::traits::Block as BlockT;
