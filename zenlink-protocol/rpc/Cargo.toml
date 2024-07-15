@@ -14,7 +14,7 @@ serde = { version = "1.0.136", features = ["derive"] }
 codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false }
 scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
 
-jsonrpsee = { version = "0.16.2", features = ["client-core", "server", "macros"] }
+jsonrpsee = { version = "0.20.3", features = ["client-core", "server", "macros"] }
 
 # Substrate packages
 

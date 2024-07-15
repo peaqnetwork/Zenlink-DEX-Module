@@ -7,9 +7,12 @@
 
 use codec::Codec;
 use jsonrpsee::{
-	core::{Error as JsonRpseeError, RpcResult},
-	proc_macros::rpc,
-	types::error::{CallError, ErrorObject},
+    core::RpcResult,
+    proc_macros::rpc,
+    types::{
+        error::{INTERNAL_ERROR_CODE, INTERNAL_ERROR_MSG},
+        ErrorObjectOwned,
+    },
 };
 
 use sp_api::ProvideRuntimeApi;
@@ -220,11 +223,11 @@ impl From<Error> for i32 {
 }
 
 /// Converts a runtime trap into an RPC error.
-fn runtime_error_into_rpc_err(err: impl std::fmt::Display) -> JsonRpseeError {
-	CallError::Custom(ErrorObject::owned(
-		Error::RuntimeError.into(),
-		"error in zenlink pallet",
-		Some(err.to_string()),
-	))
-	.into()
+fn runtime_error_into_rpc_err(err: impl std::fmt::Display) -> ErrorObjectOwned {
+    ErrorObjectOwned::owned(
+        INTERNAL_ERROR_CODE,
+        INTERNAL_ERROR_MSG,
+        Some(err.to_string()),
+    )
+
 }
