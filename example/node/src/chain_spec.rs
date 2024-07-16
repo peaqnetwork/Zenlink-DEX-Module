@@ -186,12 +186,6 @@ fn testnet_genesis(
 ) -> zenlink_template_runtime::RuntimeGenesisConfig {
 	zenlink_template_runtime::RuntimeGenesisConfig {
 		system: Default::default(),
-		// system: zenlink_template_runtime::SystemConfig {
-		// 	code: zenlink_template_runtime::WASM_BINARY
-		// 		.expect("WASM binary was not build, please build it!")
-		// 		.to_vec(),
-        //     ..Default::default()
-		// },
 		balances: zenlink_template_runtime::BalancesConfig {
 			balances: endowed_accounts.iter().cloned().map(|k| (k, 1 << 60)).collect(),
 		},
