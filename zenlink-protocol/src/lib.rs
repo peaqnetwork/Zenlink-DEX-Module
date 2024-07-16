@@ -39,7 +39,7 @@ use sp_std::{
 // -------xcm--------
 pub use cumulus_primitives_core::ParaId;
 
-use xcm::v3::{Junction, Junctions, MultiLocation};
+use xcm::latest::{prelude::*};
 
 // -------xcm--------
 
@@ -101,7 +101,7 @@ pub mod pallet {
 		type LpGenerate: GenerateLpAssetId<Self::AssetId>;
 
 		/// The set of parachains which the xcm can reach.
-		type TargetChains: Get<Vec<(MultiLocation, u128)>>;
+		type TargetChains: Get<Vec<(Location, u128)>>;
 		/// This parachain id.
 		type SelfParaId: Get<u32>;
 

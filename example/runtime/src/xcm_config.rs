@@ -1,6 +1,6 @@
 use super::{
 	AccountId, Balances, ParachainInfo, ParachainSystem, PolkadotXcm, Runtime, RuntimeCall,
-	RuntimeEvent, RuntimeOrigin, WeightToFee, XcmpQueue, weights
+	RuntimeEvent, RuntimeOrigin, WeightToFee, XcmpQueue, weights, MessageQueue
 };
 use frame_support::pallet_prelude::{ConstU32};
 use core::marker::PhantomData;
@@ -19,22 +19,24 @@ use xcm_builder::{
 	RelayChainAsNative, SiblingParachainAsNative, SiblingParachainConvertsVia,
 	SignedAccountId32AsNative, SignedToAccountId32, SovereignSignedViaLocation, TakeWeightCredit,
 	UsingComponents,
+	FrameTransactionalProcessor,
 };
 use frame_support::traits::{ProcessMessageError};
 use xcm_executor::{traits::ShouldExecute, XcmExecutor};
 use crate::AllPalletsWithSystem;
 use xcm_executor::traits::Properties;
+use frame_support::traits::Contains;
 
 parameter_types! {
-	pub const RelayLocation: MultiLocation = MultiLocation::parent();
+	pub const RelayLocation: Location = Location::parent();
 	pub const RelayNetwork: NetworkId = NetworkId::Rococo;
 	pub RelayChainOrigin: RuntimeOrigin = cumulus_pallet_xcm::Origin::Relay.into();
-	pub Ancestry: MultiLocation = Parachain(ParachainInfo::parachain_id().into()).into();
-    pub UniversalLocation: InteriorMultiLocation =
-    X2(GlobalConsensus(RelayNetwork::get()), Parachain(ParachainInfo::parachain_id().into()));
+	pub Ancestry: Location = Parachain(ParachainInfo::parachain_id().into()).into();
+	pub UniversalLocation: InteriorLocation =
+		[GlobalConsensus(RelayNetwork::get()), Parachain(ParachainInfo::parachain_id().into())].into();
 }
 
-/// Type for specifying how a `MultiLocation` can be converted into an `AccountId`. This is used
+/// Type for specifying how a `Location` can be converted into an `AccountId`. This is used
 /// when determining ownership of accounts for asset transacting and when attempting to use XCM
 /// `Transact` in order to determine the dispatch Origin.
 pub type LocationToAccountId = (
@@ -52,7 +54,7 @@ pub type LocalAssetTransactor = CurrencyAdapter<
 	Balances,
 	// Use this currency when it is a fungible asset matching the given location or name:
 	IsConcrete<RelayLocation>,
-	// Do a simple punn to convert an AccountId32 MultiLocation into a native chain account ID:
+	// Do a simple punn to convert an AccountId32 Location into a native chain account ID:
 	LocationToAccountId,
 	// Our chain's account ID type (we can't get away without mentioning it explicitly):
 	AccountId,
@@ -87,11 +89,11 @@ parameter_types! {
 	pub const MaxInstructions: u32 = 100;
 }
 
-match_types! {
-	pub type ParentOrParentsExecutivePlurality: impl Contains<MultiLocation> = {
-		MultiLocation { parents: 1, interior: Here } |
-		MultiLocation { parents: 1, interior: X1(Plurality { id: BodyId::Executive, .. }) }
-	};
+pub struct ParentOrParentsPlurality;
+impl Contains<Location> for ParentOrParentsPlurality {
+    fn contains(location: &Location) -> bool {
+        matches!(location.unpack(), (1, []) | (1, [Plurality { .. }]))
+    }
 }
 
 //TODO: move DenyThenTry to polkadot's xcm module.
@@ -108,7 +110,7 @@ where
 	Allow: ShouldExecute,
 {
 	fn should_execute<RuntimeCall>(
-		origin: &MultiLocation,
+		origin: &Location,
 		message: &mut [Instruction<RuntimeCall>],
 		max_weight: XcmWeight,
 		weight_credit: &mut Properties,
@@ -122,7 +124,7 @@ where
 pub struct DenyReserveTransferToRelayChain;
 impl ShouldExecute for DenyReserveTransferToRelayChain {
 	fn should_execute<RuntimeCall>(
-		origin: &MultiLocation,
+		origin: &Location,
 		message: &mut [Instruction<RuntimeCall>],
 		_max_weight: XcmWeight,
 		_weight_credit: &mut Properties,
@@ -131,11 +133,11 @@ impl ShouldExecute for DenyReserveTransferToRelayChain {
 			matches!(
 				inst,
 				InitiateReserveWithdraw {
-					reserve: MultiLocation { parents: 1, interior: Here },
+					reserve: Location { parents: 1, interior: Here },
 					..
-				} | DepositReserveAsset { dest: MultiLocation { parents: 1, interior: Here }, .. } |
+				} | DepositReserveAsset { dest: Location { parents: 1, interior: Here }, .. } |
 					TransferReserveAsset {
-						dest: MultiLocation { parents: 1, interior: Here },
+						dest: Location { parents: 1, interior: Here },
 						..
 					}
 			)
@@ -145,7 +147,7 @@ impl ShouldExecute for DenyReserveTransferToRelayChain {
 
 		// An unexpected reserve transfer has arrived from the Relay Chain. Generally, `IsReserve`
 		// should not allow this, but we just log it here.
-		if matches!(origin, MultiLocation { parents: 1, interior: Here }) &&
+		if matches!(origin, Location { parents: 1, interior: Here }) &&
 			message.iter().any(|inst| matches!(inst, ReserveAssetDeposited { .. }))
 		{
 			log::warn!(
@@ -163,7 +165,7 @@ pub type Barrier = DenyThenTry<
 	(
 		TakeWeightCredit,
 		AllowTopLevelPaidExecutionFrom<Everything>,
-		AllowUnpaidExecutionFrom<ParentOrParentsExecutivePlurality>,
+		AllowUnpaidExecutionFrom<ParentOrParentsPlurality>,
 		// ^^^ Parent and its exec plurality get free execution
 	),
 >;
@@ -197,6 +199,8 @@ impl xcm_executor::Config for XcmConfig {
 	type CallDispatcher = RuntimeCall;
     type SafeCallFilter = ();
     type Aliasers = Nothing;
+
+	type TransactionalProcessor = FrameTransactionalProcessor;
 }
 
 /// No local origins on this chain are allowed to dispatch XCM sends/executions.

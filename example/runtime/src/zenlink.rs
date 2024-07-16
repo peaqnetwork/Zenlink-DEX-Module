@@ -12,14 +12,14 @@ use zenlink_vault::VaultAssetGenerate;
 use cumulus_primitives_core::Parachain;
 use crate::xcm_config::RelayNetwork;
 use cumulus_primitives_core::GlobalConsensus;
-use cumulus_primitives_core::X2;
 
 parameter_types! {
 	pub SelfParaId: u32 = ParachainInfo::parachain_id().into();
 	pub const ZenlinkPalletId: PalletId = PalletId(*b"/zenlink");
-	pub ZenlinkRegisteredParaChains: Vec<(MultiLocation, u128)> = vec![
-        (X2(GlobalConsensus(RelayNetwork::get()), Parachain(2001)).into(), 10_000_000_000),
+	pub ZenlinkRegisteredParaChains: Vec<(Location, u128)> = vec![
+        ([GlobalConsensus(RelayNetwork::get()), Parachain(2001)].into(), 10_000_000_000),
 	];
+
 	pub const StringLimit: u32 = 50;
 	pub const StableAmmPalletId: PalletId = PalletId(*b"bf/stamm");
 	pub const VaultPalletId: PalletId = PalletId(*b"bf/vault");

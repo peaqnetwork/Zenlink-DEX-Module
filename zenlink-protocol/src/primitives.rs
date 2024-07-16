@@ -78,15 +78,15 @@ impl<T: Config> GenerateLpAssetId<AssetId> for PairLpGenerate<T> {
     }
 }
 
-impl Into<MultiLocation> for AssetId {
-	fn into(self) -> MultiLocation {
-		MultiLocation::new(
+impl Into<Location> for AssetId {
+	fn into(self) -> Location {
+		Location::new(
 			1,
-			Junctions::X3(
+			[
 				Junction::Parachain(self.chain_id),
 				Junction::PalletInstance(self.asset_type),
 				Junction::GeneralIndex { 0: self.asset_index as u128 },
-			),
+			],
 		)
 	}
 }
