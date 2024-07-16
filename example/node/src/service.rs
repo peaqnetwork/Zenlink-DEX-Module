@@ -9,17 +9,17 @@ use cumulus_client_consensus_aura::collators::basic as basic_aura;
 use zenlink_template_runtime::{opaque::Block, RuntimeApi};
 
 // Cumulus Imports
-use cumulus_client_consensus_aura::{AuraConsensus, BuildAuraConsensusParams, SlotProportion};
-use cumulus_client_consensus_common::ParachainConsensus;
-use cumulus_client_network::BlockAnnounceValidator;
+
+
+
 use cumulus_client_service::{
-	prepare_node_config, start_collator, start_full_node, StartCollatorParams, StartFullNodeParams,
+	prepare_node_config,
 };
 
 use cumulus_relay_chain_interface::{RelayChainInterface};
 use cumulus_client_service::build_relay_chain_interface;
 use cumulus_primitives_core::{
-	relay_chain::{CollatorPair, ValidationCode},
+	relay_chain::{CollatorPair},
 	ParaId,
 };
 
@@ -186,7 +186,7 @@ async fn start_node_impl(
 	let validator = parachain_config.role.is_authority();
 	let prometheus_registry = parachain_config.prometheus_registry().cloned();
 	let transaction_pool = params.transaction_pool.clone();
-    let import_queue_service = params.import_queue.service();
+    let _import_queue_service = params.import_queue.service();
     let net_config = sc_network::config::FullNetworkConfiguration::new(&parachain_config.network);
     let (network, system_rpc_tx, tx_handler_controller, network_starter, sync_service) =
 		cumulus_client_service::build_network(cumulus_client_service::BuildNetworkParams {
@@ -245,16 +245,16 @@ async fn start_node_impl(
 		}
 	}
 
-	let announce_block = {
+	let _announce_block = {
         let sync_service = sync_service.clone();                                                         
         Arc::new(move |hash, data| sync_service.announce_block(hash, data))                              
 	};
 
-    let overseer_handle = relay_chain_interface
+    let _overseer_handle = relay_chain_interface
         .overseer_handle()
         .map_err(|e| sc_service::Error::Application(Box::new(e)))?;
 
-	let relay_chain_slot_duration = Duration::from_secs(6);
+	let _relay_chain_slot_duration = Duration::from_secs(6);
 
 	if validator {
 		build_consensus(
@@ -319,7 +319,7 @@ fn build_import_queue(
 
 fn build_consensus(
 	client: Arc<ParachainClient>,
-	backend: Arc<ParachainBackend>,
+	_backend: Arc<ParachainBackend>,
     block_import: ParachainBlockImport,
 	prometheus_registry: Option<&Registry>,
 	telemetry: Option<TelemetryHandle>,
@@ -328,11 +328,11 @@ fn build_consensus(
 	transaction_pool: Arc<sc_transaction_pool::FullPool<Block, ParachainClient>>,
 	sync_oracle: Arc<SyncingService<Block>>,
 	keystore: KeystorePtr,
-	force_authoring: bool,
+	_force_authoring: bool,
 	para_id: ParaId,
 	collator_key: CollatorPair,
 ) -> Result<(), sc_service::Error> {
-	let spawn_handle = task_manager.spawn_handle();
+	let _spawn_handle = task_manager.spawn_handle();
 
 	let slot_duration = cumulus_client_consensus_aura::slot_duration(&*client)?;
 
