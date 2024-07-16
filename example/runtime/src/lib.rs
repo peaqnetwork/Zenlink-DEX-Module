@@ -468,7 +468,8 @@ impl pallet_collator_selection::Config for Runtime {
 	type PotId = PotId;
 	type MaxCandidates = MaxCandidates;
 	type MaxInvulnerables = MaxInvulnerables;
-    type MinEligibleCollators = ();
+	// Just add this for avoid the test fails
+    type MinEligibleCollators = ConstU32<1>;
 	// should be a multiple of session or things will get inconsistent
 	type KickThreshold = Period;
 	type ValidatorId = <Self as frame_system::Config>::AccountId;

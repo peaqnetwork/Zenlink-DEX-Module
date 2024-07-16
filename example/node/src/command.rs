@@ -173,7 +173,7 @@ pub fn run() -> Result<()> {
 			runner.sync_run(|config| {
 				let _spec = cli.load_spec(&cmd.shared_params.chain.clone().unwrap_or_default())?;
                 let partials = new_partial(&config)?;
-                cmd.run(&*config.chain_spec, &*partials.client)
+                cmd.run(partials.client)
 			})
 		},
 		Some(Subcommand::ExportGenesisWasm(cmd)) => {

@@ -29,7 +29,7 @@ impl zenlink_protocol::Config for Runtime {
 	type RuntimeEvent = super::RuntimeEvent;
 	type MultiAssetsHandler = MultiAssets;
 	type PalletId = ZenlinkPalletId;
-	type AssetId = AssetId;
+	type AssetId = zenlink_protocol::AssetId;
 	type LpGenerate = PairLpGenerate<Self>;
 	type TargetChains = ZenlinkRegisteredParaChains;
 	type SelfParaId = SelfParaId;
@@ -178,7 +178,7 @@ impl zenlink_swap_router::Config for Runtime {
 	type StablePoolId = PoolId;
 	type Balance = Balance;
 	type StableCurrencyId = CurrencyId;
-	type NormalCurrencyId = AssetId;
+	type NormalCurrencyId = zenlink_protocol::AssetId;
 	type NormalAmm = ZenlinkProtocol;
 	type StableAMM = ZenlinkStableAmm;
 	type WeightInfo = ();

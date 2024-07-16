@@ -113,6 +113,7 @@ pub fn development_config() -> ChainSpec {
 			relay_chain: "rococo-local".into(), // You MUST set this to the correct network!
 			para_id: 1000,
 		},
+		zenlink_template_runtime::WASM_BINARY.unwrap(),
 	)
 }
 
@@ -174,6 +175,7 @@ pub fn local_testnet_config() -> ChainSpec {
 			relay_chain: "rococo-local".into(), // You MUST set this to the correct network!
 			para_id: 1000,
 		},
+		zenlink_template_runtime::WASM_BINARY.unwrap(),
 	)
 }
 
@@ -183,12 +185,13 @@ fn testnet_genesis(
 	id: ParaId,
 ) -> zenlink_template_runtime::RuntimeGenesisConfig {
 	zenlink_template_runtime::RuntimeGenesisConfig {
-		system: zenlink_template_runtime::SystemConfig {
-			code: zenlink_template_runtime::WASM_BINARY
-				.expect("WASM binary was not build, please build it!")
-				.to_vec(),
-            ..Default::default()
-		},
+		system: Default::default(),
+		// system: zenlink_template_runtime::SystemConfig {
+		// 	code: zenlink_template_runtime::WASM_BINARY
+		// 		.expect("WASM binary was not build, please build it!")
+		// 		.to_vec(),
+        //     ..Default::default()
+		// },
 		balances: zenlink_template_runtime::BalancesConfig {
 			balances: endowed_accounts.iter().cloned().map(|k| (k, 1 << 60)).collect(),
 		},

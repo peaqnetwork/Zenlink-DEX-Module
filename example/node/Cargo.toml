@@ -11,7 +11,7 @@ clap = { version = "4.0.17", features = ["derive"] }
 log = "0.4.17"
 codec = { package = "parity-scale-codec", version = "3.0.0" }
 serde = { version = "1.0.145", features = ["derive"] }
-jsonrpsee = { version = "0.16.2", features = ["server"] }
+jsonrpsee = { version = "0.20.3", features = ["server"] }
 
 # Local
 zenlink-template-runtime = { path = "../runtime" }
@@ -71,6 +71,7 @@ cumulus-relay-chain-inprocess-interface = { git = "https://github.com/peaqnetwor
 cumulus-relay-chain-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-v1.7.2" }
 cumulus-relay-chain-rpc-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-v1.7.2" }
 cumulus-relay-chain-minimal-node = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-v1.7.2" }
+cumulus-client-consensus-proposer = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-v1.7.2" }
 
 [build-dependencies]
 substrate-build-script-utils = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-v1.7.2" }
