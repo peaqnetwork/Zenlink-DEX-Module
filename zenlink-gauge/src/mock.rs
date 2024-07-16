@@ -90,6 +90,7 @@ impl frame_system::Config for Test {
 	type SS58Prefix = ();
 	type OnSetCode = ();
 	type MaxConsumers = frame_support::traits::ConstU32<16>;
+	type RuntimeTask = ();
 }
 
 impl orml_tokens::Config for Test {
@@ -119,8 +120,8 @@ impl pallet_balances::Config for Test {
 
     type RuntimeHoldReason = ();
     type FreezeIdentifier = ();
-    type MaxHolds = ();
     type MaxFreezes = ();
+	type RuntimeFreezeReason = ();
 }
 
 impl pallet_timestamp::Config for Test {
