@@ -1773,14 +1773,14 @@ fn ramp_a_upwards_should_work() {
 
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 		assert_ok!(StableAmm::ramp_a(RawOrigin::Root.into(), pool_id, 100, end_timestamp.into()));
 
 		let pool = StableAmm::pools(pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5000));
 		assert_eq!(StableAmm::get_virtual_price(pool_id), 1000167146429977312);
 
-		mine_block_with_timestamp(Timestamp::now() / 1000 + 100000);
+		mine_block_with_timestamp(Timestamp::now().as_secs() + 100000);
 
 		let pool = StableAmm::pools(pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5413));
@@ -1811,7 +1811,7 @@ fn ramp_a_downward_should_work() {
 
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 		assert_ok!(StableAmm::ramp_a(RawOrigin::Root.into(), pool_id, 25, end_timestamp.into()));
 
 		let pool = StableAmm::pools(pool_id).unwrap().get_pool_info();
@@ -1819,7 +1819,7 @@ fn ramp_a_downward_should_work() {
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5000));
 		assert_eq!(StableAmm::get_virtual_price(pool_id), 1000167146429977312);
 
-		mine_block_with_timestamp(Timestamp::now() / 1000 + 100000);
+		mine_block_with_timestamp(Timestamp::now().as_secs() + 100000);
 
 		let pool = StableAmm::pools(pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(4794));
@@ -1838,7 +1838,7 @@ fn ramp_a_with_non_owner_should_not_work() {
 		let (pool_id, _) = setup_test_base_pool();
 
 		mine_block();
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 
 		assert_noop!(
 			StableAmm::ramp_a(RawOrigin::Signed(BOB).into(), pool_id, 55, end_timestamp.into()),
@@ -1853,7 +1853,7 @@ fn ramp_a_not_delay_should_not_work() {
 		let (pool_id, _) = setup_test_base_pool();
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 		assert_ok!(StableAmm::ramp_a(RawOrigin::Root.into(), pool_id, 55, end_timestamp.into()));
 
 		assert_noop!(
@@ -1869,7 +1869,7 @@ fn ramp_a_out_of_range_should_not_work() {
 		let (pool_id, _) = setup_test_base_pool();
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 
 		assert_noop!(
 			StableAmm::ramp_a(RawOrigin::Root.into(), pool_id, 0, end_timestamp.into()),
@@ -1889,10 +1889,10 @@ fn stop_ramp_a_should_work() {
 		let (pool_id, _) = setup_test_base_pool();
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 100;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 100;
 		assert_ok!(StableAmm::ramp_a(RawOrigin::Root.into(), pool_id, 100, end_timestamp.into()));
 
-		mine_block_with_timestamp(Timestamp::now() / 1000 + 100000);
+		mine_block_with_timestamp(Timestamp::now().as_secs() + 100000);
 
 		let pool = StableAmm::pools(pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5413));
@@ -1913,10 +1913,10 @@ fn stop_ramp_a_repeat_should_not_work() {
 		let (pool_id, _) = setup_test_base_pool();
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 100;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 100;
 		assert_ok!(StableAmm::ramp_a(RawOrigin::Root.into(), pool_id, 100, end_timestamp.into()));
 
-		mine_block_with_timestamp(Timestamp::now() / 1000 + 100000);
+		mine_block_with_timestamp(Timestamp::now().as_secs() + 100000);
 
 		let pool = StableAmm::pools(pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5413));
@@ -1952,11 +1952,11 @@ fn check_maximum_differences_in_a_and_virtual_price_when_time_manipulations_and_
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5000));
 		assert_eq!(StableAmm::get_virtual_price(pool_id), 1000167146429977312);
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 100;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 100;
 		assert_ok!(StableAmm::ramp_a(RawOrigin::Root.into(), pool_id, 100, end_timestamp.into()));
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 
 		let pool = StableAmm::pools(pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5003));
@@ -1984,12 +1984,12 @@ fn check_maximum_differences_in_a_and_virtual_price_when_time_manipulations_and_
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5000));
 		assert_eq!(StableAmm::get_virtual_price(pool_id), 1000167146429977312);
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 100;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 100;
 
 		assert_ok!(StableAmm::ramp_a(RawOrigin::Root.into(), pool_id, 25, end_timestamp.into()));
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 
 		let pool = StableAmm::pools(pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(4999));
@@ -2022,7 +2022,7 @@ fn prepare_attack_context(new_a: Balance) -> AttackContext {
 		RawOrigin::Root.into(),
 		pool_id,
 		new_a,
-		(Timestamp::now() / 1000 + 14 * DAYS).into()
+		(Timestamp::now().as_secs() + 14 * DAYS).into()
 	));
 
 	assert_eq!(attack_balances[0], 1e20 as Balance);
@@ -2070,7 +2070,7 @@ fn check_when_ramp_a_upwards_and_tokens_price_equally() {
 		assert_eq!(pool.balances[1], 91408257454997694);
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5003));
 
@@ -2161,7 +2161,7 @@ fn check_when_ramp_a_upwards_and_tokens_price_unequally() {
 		assert_eq!(pool.balances[1], 1988066748939318647);
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5003));
 
 		let balances_before = get_user_token_balances(&context.pool_currencies, &context.attacker);
@@ -2233,7 +2233,7 @@ fn check_when_ramp_a_downwards_and_tokens_price_equally() {
 		assert_eq!(pool.balances[1], 91408257454997694);
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(4999));
 
@@ -2324,7 +2324,7 @@ fn check_when_ramp_a_downwards_and_tokens_price_unequally() {
 		assert_eq!(pool.balances[1], 1988066748939318647);
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(4999));
 
 		let balances_before = get_user_token_balances(&context.pool_currencies, &context.attacker);

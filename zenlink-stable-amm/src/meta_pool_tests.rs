@@ -2267,7 +2267,7 @@ fn ramp_meta_a_upwards_should_work() {
 
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 		assert_ok!(StableAmm::ramp_a(
 			RawOrigin::Root.into(),
 			meta_pool_id,
@@ -2279,7 +2279,7 @@ fn ramp_meta_a_upwards_should_work() {
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5000));
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000167146429977312);
 
-		mine_block_with_timestamp(Timestamp::now() / 1000 + 100000);
+		mine_block_with_timestamp(Timestamp::now().as_secs() + 100000);
 
 		let pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5413));
@@ -2310,7 +2310,7 @@ fn ramp_meta_a_downward_should_work() {
 
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 		assert_ok!(StableAmm::ramp_a(
 			RawOrigin::Root.into(),
 			meta_pool_id,
@@ -2323,7 +2323,7 @@ fn ramp_meta_a_downward_should_work() {
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5000));
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000167146429977312);
 
-		mine_block_with_timestamp(Timestamp::now() / 1000 + 100000);
+		mine_block_with_timestamp(Timestamp::now().as_secs() + 100000);
 
 		let pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(4794));
@@ -2342,7 +2342,7 @@ fn ramp_meta_a_with_non_owner_should_not_work() {
 		let (_, meta_pool_id) = setup_test_meta_pool();
 
 		mine_block();
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 
 		assert_noop!(
 			StableAmm::ramp_a(
@@ -2362,7 +2362,7 @@ fn ramp_meta_a_not_delay_should_not_work() {
 		let (_, meta_pool_id) = setup_test_meta_pool();
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 		assert_ok!(StableAmm::ramp_a(
 			RawOrigin::Root.into(),
 			meta_pool_id,
@@ -2383,7 +2383,7 @@ fn ramp_meta_a_out_of_range_should_not_work() {
 		let (_, meta_pool_id) = setup_test_meta_pool();
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 1;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 1;
 
 		assert_noop!(
 			StableAmm::ramp_a(RawOrigin::Root.into(), meta_pool_id, 0, end_timestamp.into()),
@@ -2403,7 +2403,7 @@ fn stop_ramp_meta_a_should_work() {
 		let (_, meta_pool_id) = setup_test_meta_pool();
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 100;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 100;
 		assert_ok!(StableAmm::ramp_a(
 			RawOrigin::Root.into(),
 			meta_pool_id,
@@ -2411,7 +2411,7 @@ fn stop_ramp_meta_a_should_work() {
 			end_timestamp.into()
 		));
 
-		mine_block_with_timestamp(Timestamp::now() / 1000 + 100000);
+		mine_block_with_timestamp(Timestamp::now().as_secs() + 100000);
 
 		let pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5413));
@@ -2432,7 +2432,7 @@ fn stop_ramp_meta_a_repeat_should_not_work() {
 		let (_, meta_pool_id) = setup_test_meta_pool();
 		mine_block();
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 100;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 100;
 		assert_ok!(StableAmm::ramp_a(
 			RawOrigin::Root.into(),
 			meta_pool_id,
@@ -2440,7 +2440,7 @@ fn stop_ramp_meta_a_repeat_should_not_work() {
 			end_timestamp.into()
 		));
 
-		mine_block_with_timestamp(Timestamp::now() / 1000 + 100000);
+		mine_block_with_timestamp(Timestamp::now().as_secs() + 100000);
 
 		let pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5413));
@@ -2477,7 +2477,7 @@ fn meta_pool_check_maximum_differences_in_a_and_virtual_price_when_time_manipula
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5000));
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000167146429977312);
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 100;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 100;
 		assert_ok!(StableAmm::ramp_a(
 			RawOrigin::Root.into(),
 			meta_pool_id,
@@ -2486,7 +2486,7 @@ fn meta_pool_check_maximum_differences_in_a_and_virtual_price_when_time_manipula
 		));
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 
 		let pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5003));
@@ -2515,7 +2515,7 @@ fn meta_check_maximum_differences_in_a_and_virtual_price_when_time_manipulations
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5000));
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000167146429977312);
 
-		let end_timestamp = Timestamp::now() / 1000 + 14 * DAYS + 100;
+		let end_timestamp = Timestamp::now().as_secs() + 14 * DAYS + 100;
 
 		assert_ok!(StableAmm::ramp_a(
 			RawOrigin::Root.into(),
@@ -2525,7 +2525,7 @@ fn meta_check_maximum_differences_in_a_and_virtual_price_when_time_manipulations
 		));
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 
 		let pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(4999));
@@ -2558,7 +2558,7 @@ fn prepare_attack_meta_context(new_a: Balance) -> AttackContext {
 		RawOrigin::Root.into(),
 		meta_pool_id,
 		new_a,
-		(Timestamp::now() / 1000 + 14 * DAYS).into()
+		(Timestamp::now().as_secs() + 14 * DAYS).into()
 	));
 
 	assert_eq!(attack_balances[0], 1e20 as Balance);
@@ -2606,7 +2606,7 @@ fn check_when_ramp_a_upwards_and_tokens_price_equally() {
 		assert_eq!(pool.balances[1], 91408257454997694);
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5003));
 
@@ -2697,7 +2697,7 @@ fn meta_check_when_ramp_a_upwards_and_tokens_price_unequally() {
 		assert_eq!(pool.balances[1], 1988066748939318647);
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(5003));
 
 		let balances_before = get_user_token_balances(&context.pool_currencies, &context.attacker);
@@ -2769,7 +2769,7 @@ fn meta_check_when_ramp_a_downwards_and_tokens_price_equally() {
 		assert_eq!(pool.balances[1], 91408257454997694);
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(4999));
 
@@ -2860,7 +2860,7 @@ fn meta_check_when_ramp_a_downwards_and_tokens_price_unequally() {
 		assert_eq!(pool.balances[1], 1988066748939318647);
 
 		// Malicious miner skips 900 seconds
-		set_block_timestamp(Timestamp::now() / 1000 + 900);
+		set_block_timestamp(Timestamp::now().as_secs() + 900);
 		assert_eq!(StableAmm::get_a_precise(&pool), Some(4999));
 
 		let balances_before = get_user_token_balances(&context.pool_currencies, &context.attacker);
@@ -4136,7 +4136,7 @@ fn get_meta_virtual_price_impact_on_base_pool_should_work() {
 		assert_eq!(StableAmm::get_virtual_price(base_pool_id), 1000015381247123616);
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1e18 as Balance);
 
-		set_block_timestamp(Timestamp::now() / 1000 + 11 * 3600);
+		set_block_timestamp(Timestamp::now().as_secs() + 11 * 3600);
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000007690622981952);
 	})
 }
@@ -4155,7 +4155,7 @@ fn meta_pool_add_liquidity_impact_on_base_pool_price_should_work() {
 			u64::MAX,
 		));
 
-		set_block_timestamp(Timestamp::now() / 1000 + 11 * 3600);
+		set_block_timestamp(Timestamp::now().as_secs() + 11 * 3600);
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000007690622981952);
 
 		let meta_pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
@@ -4191,7 +4191,7 @@ fn meta_pool_remove_liquidity_impact_on_base_pool_price_should_work() {
 			u64::MAX,
 		));
 
-		set_block_timestamp(Timestamp::now() / 1000 + 11 * 3600);
+		set_block_timestamp(Timestamp::now().as_secs() + 11 * 3600);
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000007690622981952);
 
 		let meta_pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
@@ -4235,7 +4235,7 @@ fn meta_pool_remove_liquidity_one_currency_impact_on_base_pool_price_should_work
 			u64::MAX,
 		));
 
-		set_block_timestamp(Timestamp::now() / 1000 + 11 * 3600);
+		set_block_timestamp(Timestamp::now().as_secs() + 11 * 3600);
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000007690622981952);
 
 		let meta_pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
@@ -4278,7 +4278,7 @@ fn meta_pool_remove_liquidity_imbalance_impact_on_base_pool_price_should_work() 
 			u64::MAX,
 		));
 
-		set_block_timestamp(Timestamp::now() / 1000 + 11 * 3600);
+		set_block_timestamp(Timestamp::now().as_secs() + 11 * 3600);
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000007690622981952);
 
 		let meta_pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
@@ -4328,7 +4328,7 @@ fn meta_pool_swap_impact_on_base_pool_price_should_work() {
 			u64::MAX,
 		));
 
-		set_block_timestamp(Timestamp::now() / 1000 + 11 * 3600);
+		set_block_timestamp(Timestamp::now().as_secs() + 11 * 3600);
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000007690622981952);
 
 		let meta_pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
@@ -4379,7 +4379,7 @@ fn meta_pool_swap_underlying_impact_on_base_pool_price_should_work() {
 			u64::MAX,
 		));
 
-		set_block_timestamp(Timestamp::now() / 1000 + 11 * 3600);
+		set_block_timestamp(Timestamp::now().as_secs() + 11 * 3600);
 		assert_eq!(StableAmm::get_virtual_price(meta_pool_id), 1000007690622981952);
 
 		let meta_pool = StableAmm::pools(meta_pool_id).unwrap().get_pool_info();
