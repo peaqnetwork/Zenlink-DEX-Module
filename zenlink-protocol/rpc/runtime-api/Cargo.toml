@@ -1,14 +1,14 @@
 [package]
 name = "zenlink-protocol-runtime-api"
-version = "0.4.4"
+version = "0.4.5"
 authors = ["Zenlink Developers"]
 edition = "2021"
 license = "Apache 2.0"
 
 [dependencies]
 # alias "parity-scale-code" to "codec"
-codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false }
-scale-info = { version = "2.1", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.6.12", default-features = false }
+scale-info = { version = "2.11.3", default-features = false, features = ["derive"] }
 
 sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
 sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
