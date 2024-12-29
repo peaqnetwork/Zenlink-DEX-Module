@@ -13,7 +13,7 @@ const VOTE_DURATON: u64 = HOUR * 4;
 const VOTE_SET_WINDOW: u64 = HOUR;
 
 fn now() -> u64 {
-	TimestampPallet::now() / 1000
+	TimestampPallet::now().as_secs()
 }
 
 #[test]
