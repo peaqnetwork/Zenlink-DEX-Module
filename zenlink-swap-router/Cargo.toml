@@ -1,6 +1,6 @@
 [package]
 name = "zenlink-swap-router"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Zenlink Developers"]
 edition = "2021"
 license = "Apache 2.0"
@@ -9,9 +9,9 @@ license = "Apache 2.0"
 targets = ['x86_64-unknown-linux-gnu']
 
 [dependencies]
-serde = { version = "1.0.188", default-features = false }
-codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false }
-scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
+serde = { version = "1.0.210", default-features = false }
+codec = { package = "parity-scale-codec", version = "3.6.12", default-features = false }
+scale-info = { version = "2.11.3", default-features = false, features = ["derive"] }
 
 sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
 sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
@@ -22,8 +22,8 @@ frame-support = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-f
 frame-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
 frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "peaq-polkadot-stable2407" }
 
-zenlink-protocol = {package = "zenlink-protocol", path = "../zenlink-protocol", version = "0.4.4", default-features = false}
-zenlink-stable-amm = {package = "zenlink-stable-amm", path = "../zenlink-stable-amm",version = "0.1.0", default-features = false}
+zenlink-protocol = {package = "zenlink-protocol", path = "../zenlink-protocol", version = "0.4.5", default-features = false}
+zenlink-stable-amm = {package = "zenlink-stable-amm", path = "../zenlink-stable-amm",version = "0.1.1", default-features = false}
 orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-stable2407", default-features = false }
 
 [dev-dependencies]
