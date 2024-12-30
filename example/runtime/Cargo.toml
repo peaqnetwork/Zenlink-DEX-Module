@@ -12,12 +12,12 @@ targets = ["x86_64-unknown-linux-gnu"]
 substrate-wasm-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2407" }
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive"] }
-hex-literal = { version = "0.3.4", optional = true }
-log = { version = "0.4.17", default-features = false }
-scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
-serde = { version = "1.0.143", default-features = false, features = ["derive"] }
-smallvec = "1.9.0"
+codec = { package = "parity-scale-codec", version = "3.6.12", default-features = false, features = ["derive"] }
+hex-literal = { version = "0.4.1", optional = true }
+log = { version = "0.4.22", default-features = false }
+scale-info = { version = "2.11.3", default-features = false, features = ["derive"] }
+serde = { version = "1.0.210", default-features = false, features = ["derive"] }
+smallvec = "1.13.2"
 
 # Local
 zenlink-protocol = { path = "../../zenlink-protocol", default-features = false }

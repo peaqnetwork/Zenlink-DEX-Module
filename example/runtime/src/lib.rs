@@ -15,6 +15,7 @@ use cumulus_pallet_parachain_system::RelayNumberStrictlyIncreases;
 use smallvec::smallvec;
 use sp_api::impl_runtime_apis;
 use sp_core::{crypto::KeyTypeId, OpaqueMetadata};
+use sp_runtime::ExtrinsicInclusionMode;
 use sp_runtime::{
 	create_runtime_str, generic, impl_opaque_keys,
 	traits::{AccountIdLookup, BlakeTwo256, Block as BlockT, IdentifyAccount, Verify},
@@ -317,6 +318,12 @@ impl frame_system::Config for Runtime {
 	type OnSetCode = cumulus_pallet_parachain_system::ParachainSetCode<Self>;
 	type MaxConsumers = frame_support::traits::ConstU32<16>;
 	type RuntimeTask = RuntimeTask;
+
+    type SingleBlockMigrations = ();
+    type MultiBlockMigrator = ();
+    type PreInherents = ();
+    type PostInherents = ();
+    type PostTransactions = ();
 }
 
 parameter_types! {
@@ -397,6 +404,7 @@ impl cumulus_pallet_parachain_system::Config for Runtime {
 	type ReservedXcmpWeight = ReservedXcmpWeight;
 	type CheckAssociatedRelayNumber = RelayNumberStrictlyIncreases;
 	type WeightInfo = ();
+    type ConsensusHook = cumulus_pallet_parachain_system::ExpectParentIncluded;
 }
 
 impl parachain_info::Config for Runtime {}
@@ -413,6 +421,8 @@ impl cumulus_pallet_xcmp_queue::Config for Runtime {
 	type ControllerOriginConverter = XcmOriginToTransactDispatchOrigin;
 	type PriceForSiblingDelivery = NoPriceForMessageDelivery<ParaId>;
 	type WeightInfo = ();
+    type MaxActiveOutboundChannels = ConstU32<128>;
+    type MaxPageSize = MessageQueueHeapSize;
 }
 
 impl cumulus_pallet_dmp_queue::Config for Runtime {
@@ -447,6 +457,7 @@ impl pallet_aura::Config for Runtime {
 	type DisabledValidators = ();
     type AllowMultipleBlocksPerSlot = AllowMultipleBlocksPerSlot;
 	type MaxAuthorities = MaxAuthorities;
+	type SlotDuration = pallet_aura::MinimumPeriodTimesTwo<Runtime>;
 }
 
 parameter_types! {
@@ -539,6 +550,7 @@ impl pallet_message_queue::Config for Runtime {
 	type QueuePausedQuery = NarrowOriginToSibling<XcmpQueue>;
 	type WeightInfo = ();
 	type ServiceWeight = MessageQueueServiceWeight;
+    type IdleMaxServiceWeight = MessageQueueServiceWeight;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -604,7 +616,7 @@ impl_runtime_apis! {
 		}
 
 		fn authorities() -> Vec<AuraId> {
-			Aura::authorities().into_inner()
+			pallet_aura::Authorities::<Runtime>::get().into_inner()
 		}
 	}
 
@@ -617,7 +629,7 @@ impl_runtime_apis! {
 			Executive::execute_block(block)
 		}
 
-		fn initialize_block(header: &<Block as BlockT>::Header) {
+		fn initialize_block(header: &<Block as BlockT>::Header) -> ExtrinsicInclusionMode {
 			Executive::initialize_block(header)
 		}
 	}

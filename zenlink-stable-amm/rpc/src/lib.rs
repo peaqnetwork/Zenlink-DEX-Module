@@ -7,9 +7,12 @@
 
 use codec::Codec;
 use jsonrpsee::{
-	core::{Error as JsonRpseeError, RpcResult},
+	core::RpcResult,
 	proc_macros::rpc,
-	types::error::{CallError, ErrorObject},
+    types::{
+        error::{INTERNAL_ERROR_CODE, INTERNAL_ERROR_MSG},
+        ErrorObjectOwned,
+    },
 };
 
 use sp_api::ProvideRuntimeApi;
@@ -399,12 +402,7 @@ fn try_into_rpc_balance<
 	value: Balance,
 ) -> RpcResult<NumberOrHex> {
 	value.try_into().map_err(|_| {
-		CallError::Custom(ErrorObject::owned(
-			Error::RuntimeError.into(),
-			"error in stable amm pallet",
-			Some("transfer into rpc balance".to_string()),
-		))
-		.into()
+        runtime_error_into_rpc_err("Failed to convert balance into NumberOrHex")
 	})
 }
 
@@ -422,11 +420,10 @@ impl From<Error> for i32 {
 	}
 }
 
-fn runtime_error_into_rpc_err(err: impl std::fmt::Display) -> JsonRpseeError {
-	CallError::Custom(ErrorObject::owned(
-		Error::RuntimeError.into(),
-		"error in stable pallet",
-		Some(err.to_string()),
-	))
-	.into()
+fn runtime_error_into_rpc_err(message: impl std::fmt::Display) -> ErrorObjectOwned {
+    ErrorObjectOwned::owned(
+        INTERNAL_ERROR_CODE,
+        INTERNAL_ERROR_MSG,
+        Some(message.to_string()),
+    )   
 }
