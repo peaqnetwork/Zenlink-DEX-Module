@@ -1,17 +1,18 @@
 [package]
 name = "zenlink-template-node"
-version = "0.1.0"
+version = "0.1.1"
 description = "Zenlink parachain template node.,"
 license = "Unlicense"
 edition = "2021"
 build = "build.rs"
 
 [dependencies]
-clap = { version = "4.0.17", features = ["derive"] }
-log = "0.4.17"
-codec = { package = "parity-scale-codec", version = "3.0.0" }
-serde = { version = "1.0.145", features = ["derive"] }
-jsonrpsee = { version = "0.20.3", features = ["server"] }
+clap = { version = "4.5.17", features = ["derive"] }
+log = "0.4.22"
+codec = { package = "parity-scale-codec", version = "3.6.12" }
+serde = { version = "1.0.210", features = ["derive"] }
+jsonrpsee = { version = "0.23.2", features = ["server"] }
+serde_json = { version = "1.0.121", default-features = true }
 
 # Local
 zenlink-template-runtime = { path = "../runtime" }

@@ -6,7 +6,7 @@ use std::{sync::Arc, time::Duration};
 use cumulus_client_cli::CollatorOptions;
 use cumulus_client_consensus_aura::collators::basic as basic_aura;
 // Local Runtime Types
-use zenlink_template_runtime::{opaque::Block, RuntimeApi};
+use zenlink_template_runtime::{opaque::{Block, Hash}, RuntimeApi};
 
 // Cumulus Imports
 
@@ -187,7 +187,8 @@ async fn start_node_impl(
 	let prometheus_registry = parachain_config.prometheus_registry().cloned();
 	let transaction_pool = params.transaction_pool.clone();
     let _import_queue_service = params.import_queue.service();
-    let net_config = sc_network::config::FullNetworkConfiguration::new(&parachain_config.network);
+    let net_config = sc_network::config::FullNetworkConfiguration::<
+        _, _, sc_network::NetworkWorker<Block, Hash>>::new(&parachain_config.network);
     let (network, system_rpc_tx, tx_handler_controller, network_starter, sync_service) =
 		cumulus_client_service::build_network(cumulus_client_service::BuildNetworkParams {
 			parachain_config: &parachain_config,
@@ -360,17 +361,17 @@ fn build_consensus(
 		client.clone(),
 	);
 
-	let fut = basic_aura::run::<Block, AuraPair, _, _, _, _, _, _, _>(basic_aura::Params {
+	let fut = basic_aura::run::<Block, AuraPair, _, _, _, _, _, _>(basic_aura::Params {
 		create_inherent_data_providers: move |_, ()| async move { Ok(()) },
 		block_import: block_import.clone(),
 		para_client: client.clone(),
 		relay_client: relay_chain_interface.clone(),
-		sync_oracle: sync_oracle.clone(),
+		// sync_oracle: sync_oracle.clone(),
 		keystore,
 		collator_key,
 		para_id,
 		overseer_handle,
-		slot_duration,
+		// slot_duration,
 		relay_chain_slot_duration: Duration::from_secs(6),
 		proposer: cumulus_client_consensus_proposer::Proposer::new(proposer_factory),
 		collator_service,
