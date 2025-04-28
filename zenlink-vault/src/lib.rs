@@ -25,7 +25,7 @@ use sp_arithmetic::{
 use sp_runtime::traits::{AccountIdConversion, StaticLookup};
 use sp_std::{collections::btree_set::BTreeSet, vec::Vec};
 
-use frame_support::{dispatch::DispatchResult, pallet_prelude::*, PalletId};
+use frame_support::{dispatch::DispatchResult, pallet_prelude::*, PalletId, traits::ExistenceRequirement};
 
 use orml_traits::MultiCurrency;
 
@@ -379,7 +379,7 @@ impl<T: Config> Pallet<T> {
 		let vault_asset_id = Self::asset(underlying_asset_id)?;
 		let pallet_account = T::PalletId::get().into_account_truncating();
 
-		T::MultiAsset::transfer(underlying_asset_id, who, &pallet_account, amounts)?;
+		T::MultiAsset::transfer(underlying_asset_id, who, &pallet_account, amounts, ExistenceRequirement::KeepAlive)?;
 		T::MultiAsset::deposit(vault_asset_id, receiver, shares)?;
 
 		Self::deposit_event(Event::Deposit {
@@ -403,10 +403,10 @@ impl<T: Config> Pallet<T> {
 	) -> DispatchResult {
 		let vault_asset_id = Self::asset(underlying_asset_id)?;
 
-		T::MultiAsset::withdraw(vault_asset_id, owner, shares)?;
+		T::MultiAsset::withdraw(vault_asset_id, owner, shares, ExistenceRequirement::KeepAlive)?;
 		let pallet_account = T::PalletId::get().into_account_truncating();
 
-		T::MultiAsset::transfer(underlying_asset_id, &pallet_account, receiver, amounts)
+		T::MultiAsset::transfer(underlying_asset_id, &pallet_account, receiver, amounts, ExistenceRequirement::KeepAlive)
 	}
 
 	fn withdraw_fee_ratio(asset_id: T::AssetId) -> Option<Balance> {

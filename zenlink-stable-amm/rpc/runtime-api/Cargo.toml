@@ -5,8 +5,8 @@ edition = "2021"
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.6.12", default-features = false }
-sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2407", default-features = false }
-sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
+sp-api = { version = "36.0.1", default-features = false }
+sp-std = { version = "14.0.0", default-features = false }
 
 zenlink-stable-amm = { path = '../..', default-features = false }
 

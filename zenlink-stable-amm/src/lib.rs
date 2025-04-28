@@ -53,7 +53,7 @@ use codec::Codec;
 use frame_support::{
 	dispatch::{DispatchResult},
 	pallet_prelude::*,
-	traits::UnixTime,
+	traits::{UnixTime, ExistenceRequirement},
 	transactional, PalletId,
 };
 use orml_traits::MultiCurrency;
@@ -1092,6 +1092,7 @@ pub mod pallet {
 							&pool.account,
 							&pool.admin_fee_receiver,
 							balance,
+							ExistenceRequirement::KeepAlive
 						)?;
 					}
 					Self::deposit_event(Event::CollectProtocolFee {
@@ -1178,10 +1179,10 @@ impl<T: Config> Pallet<T> {
 				ensure!(*amount >= min_amounts[i], Error::<T>::AmountSlippage);
 				pool.balances[i] =
 					pool.balances[i].checked_sub(*amount).ok_or(Error::<T>::Arithmetic)?;
-				T::MultiCurrency::transfer(pool.currency_ids[i], &pool.account, to, *amount)?;
+				T::MultiCurrency::transfer(pool.currency_ids[i], &pool.account, to, *amount, ExistenceRequirement::KeepAlive)?;
 			}
 
-			T::MultiCurrency::withdraw(pool.lp_currency_id, who, lp_amount)?;
+			T::MultiCurrency::withdraw(pool.lp_currency_id, who, lp_amount, ExistenceRequirement::KeepAlive)?;
 			Self::deposit_event(Event::RemoveLiquidity {
 				pool_id,
 				who: who.clone(),

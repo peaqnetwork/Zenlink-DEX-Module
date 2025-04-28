@@ -5,16 +5,16 @@
 
 use std::marker::PhantomData;
 
-use codec::{Decode, Encode, MaxEncodedLen};
+use codec::{Decode, DecodeWithMemTracking, Encode, MaxEncodedLen};
 use scale_info::TypeInfo;
 #[cfg(feature = "std")]
 use serde::{Deserialize, Serialize};
 
 use sp_runtime::DispatchError;
 use frame_support::{
-	dispatch::{DispatchResult},
+	dispatch::DispatchResult,
 	parameter_types,
-	traits::Contains,
+	traits::{Contains, ExistenceRequirement},
 	PalletId,
 };
 use orml_traits::{parameter_type_with_key, MultiCurrency};
@@ -45,6 +45,7 @@ type Block = frame_system::mocking::MockBlock<Test>;
 	PartialOrd,
 	Ord,
 	TypeInfo,
+	DecodeWithMemTracking
 )]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub enum CurrencyId {
@@ -100,7 +101,8 @@ impl frame_system::Config for Test {
     type MultiBlockMigrator = ();                                                                        
     type PreInherents = ();                                                                              
     type PostInherents = ();
-    type PostTransactions = ();                                                                          
+    type PostTransactions = ();         
+	type ExtensionsWeightInfo = ();                                                                 
 }
 
 parameter_type_with_key! {
@@ -145,6 +147,7 @@ impl pallet_balances::Config for Test {
     type FreezeIdentifier = ();
     type MaxFreezes = ();
 	type RuntimeFreezeReason = ();
+	type DoneSlashHandler = ();
 }
 
 impl Config for Test {
@@ -171,6 +174,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 			(4, 10),
 			(5, 10),
 		],
+		..Default::default()
 	}
 	.assimilate_storage(&mut t)
 	.unwrap();
@@ -241,7 +245,7 @@ where
 		amount: AssetBalance,
 	) -> DispatchResult {
 		asset_id_to_currency_id(&asset_id).map_or(Err(DispatchError::CannotLookup), |currency_id| {
-			Local::transfer(currency_id, origin, target, amount)
+			Local::transfer(currency_id, origin, target, amount, ExistenceRequirement::KeepAlive)
 		})
 	}
 
@@ -261,7 +265,7 @@ where
 		amount: AssetBalance,
 	) -> Result<AssetBalance, DispatchError> {
 		asset_id_to_currency_id(&asset_id).map_or(Ok(AssetBalance::default()), |currency_id| {
-			Local::withdraw(currency_id, origin, amount).map(|_| amount)
+			Local::withdraw(currency_id, origin, amount, ExistenceRequirement::KeepAlive).map(|_| amount)
 		})
 	}
 }

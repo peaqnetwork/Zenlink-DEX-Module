@@ -10,10 +10,10 @@ codec = { package = "parity-scale-codec", version = "3.6.12", default-features =
 jsonrpsee = { version = "0.23.2", features = ["client-core", "server", "macros"] }
 
 
-sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
-sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
-sp-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2407" }
+sp-blockchain = { version = "39.0.0", default-features = false }
+sp-api = { version = "36.0.1", default-features = false }
+sp-rpc = { version = "34.0.0", default-features = false }
+sp-runtime = { version = "41.1.0", default-features = false }
 tower = { version = "0.4.13", features = ["util"] }
 
 zenlink-stable-amm-runtime-api = { path = "./runtime-api", version = "0.1.0"}

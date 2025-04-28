@@ -60,6 +60,7 @@ impl Contains<AccountId> for MockDustRemovalWhitelist {
 	MaxEncodedLen,
 	Ord,
 	TypeInfo,
+	DecodeWithMemTracking
 )]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub enum CurrencyId {
@@ -96,6 +97,7 @@ impl frame_system::Config for Test {
     type PreInherents = ();
     type PostInherents = ();
     type PostTransactions = ();
+	type ExtensionsWeightInfo = ();
 }
 
 impl orml_tokens::Config for Test {
@@ -127,6 +129,7 @@ impl pallet_balances::Config for Test {
     type FreezeIdentifier = ();
     type MaxFreezes = ();
 	type RuntimeFreezeReason = ();
+	type DoneSlashHandler = ();
 }
 
 impl pallet_timestamp::Config for Test {
@@ -167,7 +170,7 @@ pub const TOKEN1_UNIT: u128 = 1_000_000_000_000_000_000;
 
 pub fn new_test_ext() -> sp_io::TestExternalities {
 	let mut t = frame_system::GenesisConfig::<Test>::default().build_storage().unwrap().into();
-	pallet_balances::GenesisConfig::<Test> { balances: vec![(ALICE, u128::MAX)] }
+	pallet_balances::GenesisConfig::<Test> { balances: vec![(ALICE, u128::MAX)], ..Default::default() }
 		.assimilate_storage(&mut t)
 		.unwrap();
 

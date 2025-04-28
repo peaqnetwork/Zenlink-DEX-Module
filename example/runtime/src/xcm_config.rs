@@ -29,7 +29,7 @@ use frame_support::traits::Contains;
 
 parameter_types! {
 	pub const RelayLocation: Location = Location::parent();
-	pub const RelayNetwork: NetworkId = NetworkId::Rococo;
+	pub const RelayNetwork: NetworkId = NetworkId::Kusama;
 	pub RelayChainOrigin: RuntimeOrigin = cumulus_pallet_xcm::Origin::Relay.into();
 	pub Ancestry: Location = Parachain(ParachainInfo::parachain_id().into()).into();
 	pub UniversalLocation: InteriorLocation =
@@ -206,7 +206,7 @@ impl xcm_executor::Config for XcmConfig {
     type HrmpChannelAcceptedHandler = ();
     type HrmpChannelClosingHandler = ();
     type XcmRecorder = PolkadotXcm;
-
+	type XcmEventEmitter = ();
 }
 
 /// No local origins on this chain are allowed to dispatch XCM sends/executions.
@@ -252,6 +252,8 @@ impl pallet_xcm::Config for Runtime {
 
 	// ^ Override for AdvertisedXcmVersion default
 	type AdvertisedXcmVersion = pallet_xcm::CurrentXcmVersion;
+
+	type AuthorizedAliasConsideration = ();
 }
 
 impl cumulus_pallet_xcm::Config for Runtime {

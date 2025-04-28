@@ -64,6 +64,7 @@ impl frame_system::Config for Test {
     type PreInherents = ();
     type PostInherents = ();
     type PostTransactions = ();
+	type ExtensionsWeightInfo = ();
 }
 
 impl pallet_balances::Config for Test {
@@ -81,6 +82,7 @@ impl pallet_balances::Config for Test {
     type FreezeIdentifier = ();
     type MaxFreezes = ();
 	type RuntimeFreezeReason = ();
+	type DoneSlashHandler = ();
 }
 
 impl Config for Test {
@@ -107,6 +109,7 @@ pub fn new_test_ext() -> sp_io::TestExternalities {
 			(4, 10),
 			(5, 10),
 		],
+		..Default::default()
 	}
 	.assimilate_storage(&mut t)
 	.unwrap();

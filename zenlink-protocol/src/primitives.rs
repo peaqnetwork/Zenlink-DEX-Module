@@ -33,6 +33,7 @@ pub const RESERVED: u8 = 3;
     Serialize,
     Deserialize,
     Default,
+	DecodeWithMemTracking
 )]
 pub struct AssetId {
 	/// Parachain ID

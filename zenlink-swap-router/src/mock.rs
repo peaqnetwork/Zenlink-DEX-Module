@@ -4,7 +4,9 @@
 #[cfg(feature = "std")]
 use std::marker::PhantomData;
 
+use codec::DecodeWithMemTracking;
 use codec::{Decode, Encode, MaxEncodedLen};
+use frame_support::traits::ExistenceRequirement;
 use scale_info::TypeInfo;
 use serde::{Deserialize, Serialize};
 use sp_runtime::DispatchError;
@@ -75,6 +77,7 @@ impl Contains<AccountId> for MockDustRemovalWhitelist {
 	MaxEncodedLen,
 	Ord,
 	TypeInfo,
+	DecodeWithMemTracking
 )]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub enum CurrencyId {
@@ -97,6 +100,7 @@ pub enum CurrencyId {
 	MaxEncodedLen,
 	Ord,
 	TypeInfo,
+	DecodeWithMemTracking
 )]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub enum PoolToken {
@@ -116,6 +120,7 @@ pub enum PoolToken {
 	MaxEncodedLen,
 	Ord,
 	TypeInfo,
+	DecodeWithMemTracking
 )]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub enum PoolType {
@@ -156,6 +161,7 @@ impl frame_system::Config for Test {
     type PreInherents = ();
     type PostInherents = ();
     type PostTransactions = ();
+	type ExtensionsWeightInfo = ();
 }
 
 impl orml_tokens::Config for Test {
@@ -187,6 +193,7 @@ impl pallet_balances::Config for Test {
     type FreezeIdentifier = ();
     type MaxFreezes = ();
 	type RuntimeFreezeReason = ();
+	type DoneSlashHandler = ();
 }
 
 pub type Moment = u64;
@@ -320,7 +327,7 @@ where
 		amount: AssetBalance,
 	) -> DispatchResult {
 		asset_id_to_currency_id(&asset_id).map_or(Err(DispatchError::CannotLookup), |currency_id| {
-			Local::transfer(currency_id, origin, target, amount)
+			Local::transfer(currency_id, origin, target, amount, ExistenceRequirement::KeepAlive)
 		})
 	}
 
@@ -340,7 +347,7 @@ where
 		amount: AssetBalance,
 	) -> Result<AssetBalance, DispatchError> {
 		asset_id_to_currency_id(&asset_id).map_or(Ok(AssetBalance::default()), |currency_id| {
-			Local::withdraw(currency_id, origin, amount).map(|_| amount)
+			Local::withdraw(currency_id, origin, amount, ExistenceRequirement::KeepAlive).map(|_| amount)
 		})
 	}
 }
@@ -387,7 +394,7 @@ pub const TOKEN2_ASSET_ID: AssetId =
 
 pub fn new_test_ext() -> sp_io::TestExternalities {
 	let mut t = frame_system::GenesisConfig::<Test>::default().build_storage().unwrap().into();
-	pallet_balances::GenesisConfig::<Test> { balances: vec![(USER1, u128::MAX)] }
+	pallet_balances::GenesisConfig::<Test> { balances: vec![(USER1, u128::MAX)], ..Default::default() }
 		.assimilate_storage(&mut t)
 		.unwrap();
 

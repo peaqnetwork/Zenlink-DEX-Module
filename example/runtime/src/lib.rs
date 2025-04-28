@@ -11,7 +11,7 @@ pub mod xcm_config;
 pub mod zenlink;
 
 use frame_support::pallet_prelude::ConstU32;
-use cumulus_pallet_parachain_system::RelayNumberStrictlyIncreases;
+use cumulus_pallet_parachain_system::{DefaultCoreSelector, RelayNumberStrictlyIncreases};
 use smallvec::smallvec;
 use sp_api::impl_runtime_apis;
 use sp_core::{crypto::KeyTypeId, OpaqueMetadata};
@@ -193,7 +193,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	impl_version: 0,
 	apis: RUNTIME_API_VERSIONS,
 	transaction_version: 1,
-	state_version: 1,
+	system_version: 1,
 };
 
 /// This determines the average expected block time that we are targeting.
@@ -326,6 +326,8 @@ impl frame_system::Config for Runtime {
     type PreInherents = ();
     type PostInherents = ();
     type PostTransactions = ();
+
+	type ExtensionsWeightInfo = ();
 }
 
 parameter_types! {
@@ -372,6 +374,8 @@ impl pallet_balances::Config for Runtime {
     type FreezeIdentifier = ();
     type MaxFreezes = ConstU32<0>;
 	type RuntimeFreezeReason = RuntimeFreezeReason;
+
+	type DoneSlashHandler = ();
 }
 
 parameter_types! {
@@ -387,6 +391,7 @@ impl pallet_transaction_payment::Config for Runtime {
 	type LengthToFee = ConstantMultiplier<Balance, TransactionByteFee>;
 	type FeeMultiplierUpdate = SlowAdjustingFeeUpdate<Self>;
 	type OperationalFeeMultiplier = OperationalFeeMultiplier;
+	type WeightInfo = ();
 }
 
 parameter_types! {
@@ -407,6 +412,7 @@ impl cumulus_pallet_parachain_system::Config for Runtime {
 	type CheckAssociatedRelayNumber = RelayNumberStrictlyIncreases;
 	type WeightInfo = ();
     type ConsensusHook = cumulus_pallet_parachain_system::ExpectParentIncluded;
+	type SelectCore = cumulus_pallet_parachain_system::DefaultCoreSelector<Runtime>;
 }
 
 impl parachain_info::Config for Runtime {}
@@ -425,12 +431,6 @@ impl cumulus_pallet_xcmp_queue::Config for Runtime {
 	type WeightInfo = ();
     type MaxActiveOutboundChannels = ConstU32<128>;
     type MaxPageSize = MessageQueueHeapSize;
-}
-
-impl cumulus_pallet_dmp_queue::Config for Runtime {
-	type RuntimeEvent = RuntimeEvent;
-    type DmpSink = frame_support::traits::EnqueueWithOrigin<MessageQueue, RelayOrigin>;
-    type WeightInfo = cumulus_pallet_dmp_queue::weights::SubstrateWeight<Runtime>;
 }
 
 parameter_types! {
@@ -452,6 +452,7 @@ impl pallet_session::Config for Runtime {
 	type SessionHandler = <SessionKeys as sp_runtime::traits::OpaqueKeys>::KeyTypeIdProviders;
 	type Keys = SessionKeys;
 	type WeightInfo = ();
+	type DisablingStrategy = ();
 }
 
 impl pallet_aura::Config for Runtime {
@@ -572,7 +573,7 @@ construct_runtime!(
 		// Collator support. The order of these 4 are important and shall not change.
 		Authorship: pallet_authorship::{Pallet, Storage} = 20,
 		CollatorSelection: pallet_collator_selection::{Pallet, Call, Storage, Event<T>, Config<T>} = 21,
-		Session: pallet_session::{Pallet, Call, Storage, Event, Config<T>} = 22,
+		Session: pallet_session::{Pallet, Call, Storage, Event<T>, Config<T>} = 22,
 		Aura: pallet_aura::{Pallet, Storage, Config<T>} = 23,
 		AuraExt: cumulus_pallet_aura_ext = 24,
 
@@ -580,7 +581,6 @@ construct_runtime!(
 		XcmpQueue: cumulus_pallet_xcmp_queue::{Pallet, Call, Storage, Event<T>} = 30,
 		PolkadotXcm: pallet_xcm = 31,
 		CumulusXcm: cumulus_pallet_xcm::{Pallet, Event<T>, Origin} = 32,
-		DmpQueue: cumulus_pallet_dmp_queue::{Pallet, Call, Storage, Event<T>} = 33,
 		MessageQueue: pallet_message_queue::{Pallet, Call, Storage, Event<T>} = 34,
 
 		Tokens: orml_tokens::{Pallet, Call, Storage, Event<T>}  = 41,

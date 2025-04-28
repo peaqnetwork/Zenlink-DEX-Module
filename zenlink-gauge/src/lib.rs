@@ -16,7 +16,7 @@ use codec::{Codec, Decode, Encode};
 use sp_arithmetic::traits::{One, Zero};
 use sp_runtime::traits::{AccountIdConversion, AtLeast32BitUnsigned, StaticLookup};
 
-use frame_support::{dispatch::DispatchResult, pallet_prelude::*, traits::UnixTime, PalletId};
+use frame_support::{dispatch::DispatchResult, pallet_prelude::*, traits::UnixTime, PalletId, traits::ExistenceRequirement};
 
 use orml_traits::MultiCurrency;
 
@@ -579,7 +579,7 @@ impl<T: Config> Pallet<T> {
 		}
 		let vote_currency = Self::vote_currency().ok_or(Error::<T>::Uninitialized)?;
 		let pallet_account = T::PalletId::get().into_account_truncating();
-		T::MultiCurrency::transfer(vote_currency, who, &pallet_account, amount)?;
+		T::MultiCurrency::transfer(vote_currency, who, &pallet_account, amount, ExistenceRequirement::KeepAlive)?;
 
 		if now < current_perold.start {
 			now = current_perold.start;
@@ -638,7 +638,7 @@ impl<T: Config> Pallet<T> {
 
 				let pallet_account = T::PalletId::get().into_account_truncating();
 				let vote_currency = Self::vote_currency().ok_or(Error::<T>::Uninitialized)?;
-				T::MultiCurrency::transfer(vote_currency, &pallet_account, who, amount)?;
+				T::MultiCurrency::transfer(vote_currency, &pallet_account, who, amount, ExistenceRequirement::KeepAlive)?;
 
 				let current_period =
 					Self::vote_period(current_period_id).ok_or(Error::<T>::InvalidPeriodId)?;

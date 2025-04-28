@@ -12,6 +12,7 @@ use zenlink_vault::VaultAssetGenerate;
 use cumulus_primitives_core::Parachain;
 use crate::xcm_config::RelayNetwork;
 use cumulus_primitives_core::GlobalConsensus;
+use frame_support::traits::ExistenceRequirement;
 
 parameter_types! {
 	pub SelfParaId: u32 = ParachainInfo::parachain_id().into();
@@ -91,6 +92,7 @@ where
 				amount
 					.try_into()
 					.map_err(|_| DispatchError::Other("convert amount in local transfer"))?,
+					ExistenceRequirement::KeepAlive
 			)
 		} else {
 			Err(DispatchError::Other("unknown asset in local transfer"))
@@ -129,6 +131,7 @@ where
 				amount
 					.try_into()
 					.map_err(|_| DispatchError::Other("convert amount in local withdraw"))?,
+				ExistenceRequirement::KeepAlive
 			)?;
 		} else {
 			return Err(DispatchError::Other("unknown asset in local transfer"))

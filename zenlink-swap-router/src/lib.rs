@@ -30,7 +30,7 @@ use frame_support::{
 use zenlink_protocol::{AssetBalance, ExportZenlink};
 use zenlink_stable_amm::traits::StableAmmApi;
 
-#[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo)]
+#[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo, DecodeWithMemTracking)]
 pub struct StablePath<PoolId, CurrencyId> {
 	pub pool_id: PoolId,
 	pub base_pool_id: PoolId,
@@ -39,14 +39,14 @@ pub struct StablePath<PoolId, CurrencyId> {
 	pub to_currency: CurrencyId,
 }
 
-#[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo)]
+#[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo, DecodeWithMemTracking)]
 pub enum StableSwapMode {
 	Single,
 	FromBase,
 	ToBase,
 }
 
-#[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo)]
+#[derive(Encode, Decode, Clone, PartialEq, Eq, Debug, TypeInfo, DecodeWithMemTracking)]
 pub enum Route<PoolId, StableCurrencyId, NormalCurrencyId> {
 	Stable(StablePath<PoolId, StableCurrencyId>),
 	Normal(Vec<NormalCurrencyId>),

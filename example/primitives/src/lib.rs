@@ -1,6 +1,6 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
-use codec::{Decode, Encode, MaxEncodedLen};
+use codec::{Decode, Encode, MaxEncodedLen, DecodeWithMemTracking};
 use scale_info::TypeInfo;
 
 use serde::{Deserialize, Serialize};
@@ -48,6 +48,7 @@ impl_tokensymbol! {
 	MaxEncodedLen,
     Serialize,
     Deserialize,
+	DecodeWithMemTracking
 )]
 pub enum TokenSymbol {
 	Dev("dev",12) = 0,
@@ -75,6 +76,7 @@ pub enum TokenSymbol {
 	TypeInfo,
     Serialize,
     Deserialize,
+	DecodeWithMemTracking
 )]
 #[non_exhaustive]
 pub enum CurrencyId {
