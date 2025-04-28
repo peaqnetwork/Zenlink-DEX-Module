@@ -9552,8 +9552,8 @@ dependencies = [
  "parity-scale-codec",
  "scale-info",
  "serde",
- "sp-runtime 41.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-std 14.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "sp-runtime 41.1.0 (git+https://github.com/peaqnetwork/polkadot-sdk?branch=peaq-polkadot-stable2503)",
+ "sp-std 14.0.0 (git+https://github.com/peaqnetwork/polkadot-sdk?branch=peaq-polkadot-stable2503)",
  "zenlink-protocol",
 ]
 
