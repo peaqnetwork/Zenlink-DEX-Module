@@ -18,64 +18,64 @@ serde_json = { version = "1.0.121", default-features = true }
 zenlink-template-runtime = { path = "../runtime" }
 
 # Substrate
-frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-frame-benchmarking-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-pallet-transaction-payment-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-basic-authorship = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-chain-spec = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-client-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-consensus = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-executor = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-network-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-network-sync = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-sysinfo = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-telemetry = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-tracing = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sc-transaction-pool-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-block-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-keystore = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-offchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-session = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-sp-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-substrate-frame-rpc-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-substrate-prometheus-endpoint = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-# try-runtime-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
+frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+frame-benchmarking-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+pallet-transaction-payment-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-basic-authorship = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-chain-spec = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-client-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-consensus = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-executor = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-network-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-network-sync = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-sysinfo = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-telemetry = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-tracing = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sc-transaction-pool-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-block-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-keystore = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-offchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-session = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+sp-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+substrate-frame-rpc-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+substrate-prometheus-endpoint = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+# try-runtime-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
 
 # Polkadot
-polkadot-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-polkadot-primitives = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-polkadot-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-xcm = { package = "staging-xcm", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503" }
+polkadot-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+polkadot-primitives = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+polkadot-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+xcm = { package = "staging-xcm", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
 
 # Cumulus
-cumulus-client-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-client-collator = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-client-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-client-consensus-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-client-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-client-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-primitives-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-primitives-parachain-inherent = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-relay-chain-inprocess-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-relay-chain-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-relay-chain-rpc-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-relay-chain-minimal-node = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
-cumulus-client-consensus-proposer = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
+cumulus-client-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-client-collator = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-client-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-client-consensus-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-client-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-client-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-primitives-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-primitives-parachain-inherent = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-relay-chain-inprocess-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-relay-chain-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-relay-chain-rpc-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-relay-chain-minimal-node = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
+cumulus-client-consensus-proposer = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
 
 [build-dependencies]
-substrate-build-script-utils = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503" }
+substrate-build-script-utils = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4" }
 
 [features]
 default = []

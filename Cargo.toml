@@ -11,9 +11,10 @@ members = [
 	"zenlink-swap-router",
 	"zenlink-vault",
 	"zenlink-gauge",
-	"example/node",
-	"example/runtime",
-	"example/primitives"
+	# TODO example is broken, uncomment when fixed
+	# "example/node",
+	# "example/runtime",
+	# "example/primitives"
 ]
 
 resolver = "2"
