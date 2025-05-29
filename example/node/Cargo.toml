@@ -17,64 +17,64 @@ jsonrpsee = { version = "0.20.3", features = ["server"] }
 zenlink-template-runtime = { path = "../runtime" }
 
 # Substrate
-frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-frame-benchmarking-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-pallet-transaction-payment-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-basic-authorship = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-chain-spec = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-client-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-consensus = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-executor = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-network-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-network-sync = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-sysinfo = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-telemetry = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-tracing = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sc-transaction-pool-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-block-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-keystore = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-offchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-session = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-sp-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-substrate-frame-rpc-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-substrate-prometheus-endpoint = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-try-runtime-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
+frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+frame-benchmarking-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+pallet-transaction-payment-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-basic-authorship = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-chain-spec = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-client-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-consensus = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-executor = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-network-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-network-sync = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-sysinfo = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-telemetry = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-tracing = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sc-transaction-pool-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-block-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-keystore = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-offchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-session = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+sp-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+substrate-frame-rpc-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+substrate-prometheus-endpoint = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+try-runtime-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
 
 # Polkadot
-polkadot-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-polkadot-primitives = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-polkadot-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-xcm = { package = "staging-xcm", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
+polkadot-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+polkadot-primitives = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+polkadot-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+xcm = { package = "staging-xcm", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
 
 # Cumulus
-cumulus-client-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-client-collator = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-client-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-client-consensus-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-client-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-client-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-primitives-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-primitives-parachain-inherent = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-relay-chain-inprocess-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-relay-chain-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-relay-chain-rpc-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-relay-chain-minimal-node = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
-cumulus-client-consensus-proposer = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
+cumulus-client-cli = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-client-collator = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-client-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-client-consensus-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-client-network = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-client-service = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-primitives-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-primitives-parachain-inherent = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-relay-chain-inprocess-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-relay-chain-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-relay-chain-rpc-interface = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-relay-chain-minimal-node = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
+cumulus-client-consensus-proposer = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
 
 [build-dependencies]
-substrate-build-script-utils = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
+substrate-build-script-utils = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
 
 [features]
 default = []

@@ -18,10 +18,10 @@ jsonrpsee = { version = "0.20.3", features = ["client-core", "server", "macros"]
 
 # Substrate packages
 
-sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
+sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
 
 # Local packages
 

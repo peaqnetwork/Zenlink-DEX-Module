@@ -9,7 +9,7 @@ edition = "2021"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [build-dependencies]
-substrate-wasm-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01" }
+substrate-wasm-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue" }
 
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive"] }
@@ -27,62 +27,62 @@ zenlink-swap-router = {path = "../../zenlink-swap-router", default-features = fa
 zenlink-vault = {path = "../../zenlink-vault", default-features = false }
 
 # ORML
-orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "release-improvement-v01", default-features = false }
-orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "release-improvement-v01", default-features = false }
+orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "release-pool-issue", default-features = false }
+orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "release-pool-issue", default-features = false }
 
 # Substrate
-frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "release-improvement-v01" }
-frame-executive = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-frame-support = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-frame-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-frame-system-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "release-improvement-v01" }
-frame-system-rpc-runtime-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-frame-try-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "release-improvement-v01" }
-pallet-assets = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-pallet-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-pallet-authorship = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-pallet-balances = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-pallet-session = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-pallet-sudo = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-pallet-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-pallet-transaction-payment = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-block-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-inherents = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-offchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-session = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-sp-version = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
+frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "release-pool-issue" }
+frame-executive = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+frame-support = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+frame-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+frame-system-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "release-pool-issue" }
+frame-system-rpc-runtime-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+frame-try-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "release-pool-issue" }
+pallet-assets = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+pallet-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+pallet-authorship = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+pallet-balances = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+pallet-session = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+pallet-sudo = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+pallet-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+pallet-transaction-payment = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-block-builder = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-consensus-aura = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-inherents = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-offchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-session = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-transaction-pool = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+sp-version = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
 
 # Polkadot
-pallet-message-queue = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-pallet-xcm = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-polkadot-parachain = { package = "polkadot-parachain-primitives", git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-polkadot-runtime-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-xcm = { package = "staging-xcm", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-xcm-builder = { package = "staging-xcm-builder", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-xcm-executor = { package = "staging-xcm-executor", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-improvement-v01" }
-polkadot-primitives = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
+pallet-message-queue = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+pallet-xcm = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+polkadot-parachain = { package = "polkadot-parachain-primitives", git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+polkadot-runtime-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+xcm = { package = "staging-xcm", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+xcm-builder = { package = "staging-xcm-builder", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+xcm-executor = { package = "staging-xcm-executor", git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "release-pool-issue" }
+polkadot-primitives = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
 
 # Cumulus
-cumulus-pallet-aura-ext = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-cumulus-pallet-dmp-queue = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-cumulus-pallet-parachain-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-cumulus-pallet-session-benchmarking = {git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-cumulus-pallet-xcm = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-cumulus-pallet-xcmp-queue = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-cumulus-primitives-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-cumulus-primitives-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-cumulus-primitives-utility = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-pallet-collator-selection = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
-parachain-info = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", package = "staging-parachain-info", default-features = false }
-parachains-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-improvement-v01", default-features = false }
+cumulus-pallet-aura-ext = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+cumulus-pallet-dmp-queue = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+cumulus-pallet-parachain-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+cumulus-pallet-session-benchmarking = {git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+cumulus-pallet-xcm = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+cumulus-pallet-xcmp-queue = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+cumulus-primitives-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+cumulus-primitives-timestamp = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+cumulus-primitives-utility = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+pallet-collator-selection = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
+parachain-info = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", package = "staging-parachain-info", default-features = false }
+parachains-common = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "release-pool-issue", default-features = false }
 
 [features]
 default = [
