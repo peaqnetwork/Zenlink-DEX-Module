@@ -27,7 +27,7 @@ use sp_runtime::BuildStorage;
 use crate as pallet_zenlink;
 pub use crate::{
 	AssetBalance, AssetId, Config, LocalAssetHandler, MultiAssetsHandler, PairLpGenerate, Pallet,
-	ParaId, ZenlinkMultiAssets, LIQUIDITY, LOCAL, NATIVE, RESERVED,
+	ZenlinkMultiAssets, LOCAL, NATIVE, RESERVED,
 };
 use orml_traits::{parameter_type_with_key, MultiCurrency};
 

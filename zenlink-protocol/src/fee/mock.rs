@@ -28,7 +28,7 @@ use sp_runtime::BuildStorage;
 use crate as pallet_zenlink;
 pub use crate::{
 	AssetBalance, AssetId, Config, LocalAssetHandler, MultiAssetsHandler, PairLpGenerate, Pallet,
-	ParaId, ZenlinkMultiAssets, LIQUIDITY, LOCAL, NATIVE, RESERVED,
+	ZenlinkMultiAssets, LIQUIDITY, LOCAL, RESERVED,
 };
 
 type Block = frame_system::mocking::MockBlock<Test>;

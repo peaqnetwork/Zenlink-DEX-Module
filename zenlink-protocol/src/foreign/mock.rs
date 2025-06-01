@@ -11,7 +11,7 @@ use sp_runtime::BuildStorage;
 
 use crate as pallet_zenlink;
 pub use crate::{
-	AssetId, Config, MultiAssetsHandler, PairLpGenerate, Pallet, ParaId, ZenlinkMultiAssets,
+	AssetId, Config, PairLpGenerate, Pallet, ZenlinkMultiAssets,
 	LIQUIDITY, LOCAL, NATIVE, RESERVED,
 };
 
