@@ -27,7 +27,6 @@ use frame_support::{
 	},
 	PalletId,
 };
-use sp_runtime::RuntimeDebug;
 use sp_core::U256;
 use sp_runtime::traits::{
 	AccountIdConversion, Hash, MaybeSerializeDeserialize, One, StaticLookup, Zero,

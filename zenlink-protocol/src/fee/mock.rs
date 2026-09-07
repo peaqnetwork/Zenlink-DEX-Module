@@ -21,7 +21,7 @@ use orml_traits::{parameter_type_with_key, MultiCurrency};
 use sp_core::H256;
 use sp_runtime::{
 	traits::{BlakeTwo256, IdentityLookup},
-	RuntimeDebug,
+	Debug,
 };
 use sp_runtime::BuildStorage;
 
@@ -40,7 +40,7 @@ type Block = frame_system::mocking::MockBlock<Test>;
 	PartialEq,
 	Copy,
 	Clone,
-	RuntimeDebug,
+	Debug,
 	MaxEncodedLen,
 	PartialOrd,
 	Ord,

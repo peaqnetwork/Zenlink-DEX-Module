@@ -11,17 +11,17 @@ targets = ['x86_64-unknown-linux-gnu']
 # alias "parity-scale-code" to "codec"
 [dependencies]
 serde = { version = "1.0.210", features = ["derive"] }
-codec = { package = "parity-scale-codec", version = "3.6.12", default-features = false }
+codec = { package = "parity-scale-codec", version = "3.7.5", default-features = false }
 scale-info = { version = "2.11.6", default-features = false, features = ["derive"] }
 
 jsonrpsee = { version = "0.24.9", features = ["client-core", "server", "macros"] }
 
 # Substrate packages
 
-sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
-sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
-sp-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
+sp-blockchain = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+sp-api = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+sp-rpc = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
 tower = { version = "0.4.13", features = ["util"] }
 # Local packages
 

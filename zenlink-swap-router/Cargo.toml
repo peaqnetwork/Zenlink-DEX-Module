@@ -10,8 +10,8 @@ targets = ['x86_64-unknown-linux-gnu']
 
 [dependencies]
 serde = { version = "1.0.210", default-features = false }
-codec = { package = "parity-scale-codec", version = "3.6.12", default-features = false }
-scale-info = { version = "2.11.3", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.7.5", default-features = false }
+scale-info = { version = "2.11.6", default-features = false, features = ["derive"] }
 
 sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
 sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }

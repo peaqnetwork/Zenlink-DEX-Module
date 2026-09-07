@@ -20,7 +20,7 @@ use frame_support::{
 use sp_core::H256;
 use sp_runtime::{
 	traits::{BlakeTwo256, IdentityLookup},
-	RuntimeDebug,
+	Debug,
 };
 use sp_runtime::BuildStorage;
 
@@ -40,7 +40,7 @@ type Block = frame_system::mocking::MockBlock<Test>;
 	PartialEq,
 	Copy,
 	Clone,
-	RuntimeDebug,
+	Debug,
 	PartialOrd,
 	MaxEncodedLen,
 	Ord,

@@ -9,7 +9,7 @@ build = "build.rs"
 [dependencies]
 clap = { version = "4.5.17", features = ["derive"] }
 log = "0.4.22"
-codec = { package = "parity-scale-codec", version = "3.6.12" }
+codec = { package = "parity-scale-codec", version = "3.7.5" }
 serde = { version = "1.0.210", features = ["derive"] }
 jsonrpsee = { version = "0.23.2", features = ["server"] }
 serde_json = { version = "1.0.121", default-features = true }

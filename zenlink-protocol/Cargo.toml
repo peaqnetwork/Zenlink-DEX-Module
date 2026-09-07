@@ -12,32 +12,32 @@ targets = ['x86_64-unknown-linux-gnu']
 log = { version = "0.4.22", default-features = false }
 serde = { version = "1.0.210", default-features = false }
 # alias "parity-scale-code" to "codec"
-codec = { package = "parity-scale-codec", version = "3.6.12", default-features = false }
-scale-info = { version = "2.11.3", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.7.5", default-features = false }
+scale-info = { version = "2.11.6", default-features = false, features = ["derive"] }
 
 # Substrate
-frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "peaq-polkadot-stable2503-4" }
-sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
-frame-support = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
-frame-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
-sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
-sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4", default-features = false }
-sp-arithmetic = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4", default-features = false }
-pallet-balances = { git = 'https://github.com/peaqnetwork/polkadot-sdk', default-features = false, branch = 'peaq-polkadot-stable2503-4' }
+frame-benchmarking = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, optional = true, tag = "polkadot-stable2603-6" }
+sp-core = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+frame-support = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+frame-system = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+sp-std = { git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-stable2603-6", default-features = false }
+sp-arithmetic = { git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-stable2603-6", default-features = false }
+pallet-balances = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
 
 # Polkadot
-xcm = { package = "staging-xcm", git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4", default-features = false }
-xcm-executor = { package = "staging-xcm-executor", git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2503-4", default-features = false }
+xcm = { package = "staging-xcm", git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-stable2603-6", default-features = false }
+xcm-executor = { package = "staging-xcm-executor", git = "https://github.com/paritytech/polkadot-sdk", tag = "polkadot-stable2603-6", default-features = false }
 
 # Cumulus
-cumulus-primitives-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
+cumulus-primitives-core = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
 
-orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-stable2503-4", default-features = false }
-orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-stable2503-4", default-features = false }
+orml-traits = { path = "/home/jaypan/Work/upgrade/deps-2603/ORML/traits", default-features = false }
+orml-tokens = { path = "/home/jaypan/Work/upgrade/deps-2603/ORML/tokens", default-features = false }
 
 [dev-dependencies]
-sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
-sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
+sp-core = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+sp-io = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
 
 
 [features]

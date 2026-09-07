@@ -8,8 +8,8 @@ license = "Apache 2.0"
 
 [dependencies]
 serde = { version = "1.0.210", default-features = false }
-codec = { package = "parity-scale-codec", version = "3.6.12", default-features = false }
-scale-info = { version = "2.11.3", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.7.5", default-features = false }
+scale-info = { version = "2.11.6", default-features = false, features = ["derive"] }
 
 frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "peaq-polkadot-stable2503-4" }
 sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2503-4" }
