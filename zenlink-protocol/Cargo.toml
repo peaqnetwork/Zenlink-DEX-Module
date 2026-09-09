@@ -32,8 +32,8 @@ xcm-executor = { package = "staging-xcm-executor", git = "https://github.com/par
 # Cumulus
 cumulus-primitives-core = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
 
-orml-traits = { path = "/home/jaypan/Work/upgrade/deps-2603/ORML/traits", default-features = false }
-orml-tokens = { path = "/home/jaypan/Work/upgrade/deps-2603/ORML/tokens", default-features = false }
+orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-stable2603-6", default-features = false }
+orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-stable2603-6", default-features = false }
 
 [dev-dependencies]
 sp-core = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
