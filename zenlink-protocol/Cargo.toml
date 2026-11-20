@@ -16,28 +16,28 @@ codec = { package = "parity-scale-codec", version = "3.7.5", default-features = 
 scale-info = { version = "2.11.6", default-features = false, features = ["derive"] }
 
 # Substrate
-frame-benchmarking = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, optional = true, branch = "peaq-polkadot-stable2603-8" }
-sp-core = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
-frame-support = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
-frame-system = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
-sp-runtime = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
-sp-std = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", branch = "peaq-polkadot-stable2603-8", default-features = false }
-sp-arithmetic = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", branch = "peaq-polkadot-stable2603-8", default-features = false }
-pallet-balances = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+frame-benchmarking = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, optional = true, branch = "peaq-polkadot-stable2603-8" }
+sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+frame-support = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+frame-system = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-std = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2603-8", default-features = false }
+sp-arithmetic = { git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2603-8", default-features = false }
+pallet-balances = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
 
 # Polkadot
-xcm = { package = "staging-xcm", git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", branch = "peaq-polkadot-stable2603-8", default-features = false }
-xcm-executor = { package = "staging-xcm-executor", git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", branch = "peaq-polkadot-stable2603-8", default-features = false }
+xcm = { package = "staging-xcm", git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2603-8", default-features = false }
+xcm-executor = { package = "staging-xcm-executor", git = "https://github.com/peaqnetwork/polkadot-sdk", branch = "peaq-polkadot-stable2603-8", default-features = false }
 
 # Cumulus
-cumulus-primitives-core = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+cumulus-primitives-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
 
-orml-traits = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/deps/open-runtime-module-library", branch = "peaq-polkadot-stable2603-8", default-features = false }
-orml-tokens = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/deps/open-runtime-module-library", branch = "peaq-polkadot-stable2603-8", default-features = false }
+orml-traits = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-stable2603-8", default-features = false }
+orml-tokens = { git = "https://github.com/peaqnetwork/open-runtime-module-library", branch = "peaq-polkadot-stable2603-8", default-features = false }
 
 [dev-dependencies]
-sp-core = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
-sp-io = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-core = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-io = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
 
 
 [features]

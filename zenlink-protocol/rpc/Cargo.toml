@@ -18,10 +18,10 @@ jsonrpsee = { version = "0.24.9", features = ["client-core", "server", "macros"]
 
 # Substrate packages
 
-sp-blockchain = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
-sp-api = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
-sp-rpc = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
-sp-runtime = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-blockchain = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-api = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-rpc = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-runtime = { git = "https://github.com/peaqnetwork/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
 tower = { version = "0.4.13", features = ["util"] }
 # Local packages
 
