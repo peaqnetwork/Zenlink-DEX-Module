@@ -10,8 +10,8 @@ license = "Apache 2.0"
 codec = { package = "parity-scale-codec", version = "3.7.5", default-features = false }
 scale-info = { version = "2.11.6", default-features = false, features = ["derive"] }
 
-sp-api = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
-sp-std = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, tag = "polkadot-stable2603-6" }
+sp-api = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
+sp-std = { git = "file:///tmp/claude-1000/-home-jaypan-Work-peaq-peaq-eu-dpp-adapter/f0f1296d-9a73-467a-8bc7-c2145faf448a/scratchpad/sdk/polkadot-sdk", default-features = false, branch = "peaq-polkadot-stable2603-8" }
 
 zenlink-protocol = { path = '../..', default-features = false }
 
